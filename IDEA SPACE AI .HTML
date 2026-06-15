@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Idea Space AI · Full Chat Name Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body {
+            background: #0b0813;
+            background-image: radial-gradient(circle at 15% 30%, rgba(88, 28, 135, 0.2) 0%, transparent 45%),
+                              radial-gradient(circle at 85% 70%, rgba(13, 148, 136, 0.12) 0%, transparent 50%);
+        }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #120e22; border-radius: 8px; }
+        ::-webkit-scrollbar-thumb { background: #3c2e5e; border-radius: 8px; }
+        .glow-gradient {
+            background: linear-gradient(105deg, #6366f1 0%, #a855f7 100%);
+            transition: all 0.25s ease;
+        }
+        .glow-gradient:hover {
+            box-shadow: 0 0 16px rgba(168, 85, 247, 0.5);
+            filter: brightness(1.03);
+        }
+        .glass-panel {
+            background: rgba(18, 15, 34, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(107, 70, 193, 0.25);
+        }
+        .name-copy-btn {
+            transition: all 0.1s ease;
+        }
+    </style>
+</head>
+<body class="text-gray-200 min-h-screen flex flex-col pb-10">
+
+    <header class="w-full max-w-7xl mx-auto px-6 py-5 flex justify-between items-center border-b border-purple-950/40 flex-wrap gap-3">
+        <div class="flex items-center space-x-3">
+            <div class="bg-gradient-to-tr from-indigo-500 to-purple-500 p-2.5 rounded-xl shadow-indigo-500/30 shadow-lg">
+                <i class="fa-solid fa-brain text-white text-xl"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-extrabold tracking-tight text-white">Idea Space AI</h1>
+                <p class="text-[11px] text-purple-300/80 font-mono">Turn Ideas into Startup-Ready Concepts Instantly</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <span class="inline-flex items-center bg-emerald-950/50 border border-emerald-500/40 text-emerald-300 text-[11px] px-3 py-1.5 rounded-full font-mono font-medium">
+                <span class="w-2 h-2 bg-emerald-400 rounded-full mr-2 animate-pulse"></span> neural engine active
+            </span>
+        </div>
+    </header>
+
+    <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 mt-7 lg:mt-10">
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 bg-purple-950/50 border border-purple-800/50 backdrop-blur-sm px-4 py-1.5 rounded-full text-purple-300 text-[11px] font-mono">
+                <i class="fa-solid fa-microchip text-[10px]"></i> Idea Space AI · v3.2 (From Idea to Startup — Instantly.)
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mt-4 tracking-tight leading-tight">
+                Generative <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-purple-300 to-fuchsia-300">Innovation Workspace</span>
+            </h2>
+            <p class="text-gray-400 text-sm max-w-2xl mx-auto mt-3">Design startups<span class="text-purple-300 font-medium">“Ask AI “create a name for this idea””</span> – Get instant brand names.
+</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-7 items-start">
+            <!-- LEFT PANEL: composer + chat -->
+            <div class="lg:col-span-5 space-y-6">
+                <div class="glass-panel rounded-2xl p-5 shadow-2xl">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-sliders-h text-indigo-400 text-sm"></i>
+                            <h3 class="font-semibold text-white text-sm">idea composer</h3>
+                        </div>
+                        <span class="text-[10px] bg-indigo-950/70 text-indigo-300 px-2 py-0.5 rounded-md font-mono">context-aware</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <div>
+                            <label class="block text-[11px] font-medium text-gray-400 mb-1.5">PLATFORM MODE</label>
+                            <select id="ideaMode" class="w-full bg-[#18142c] border border-purple-900/60 rounded-xl px-3 py-2 text-xs text-gray-200 focus:border-purple-400 transition">
+                                <option value="none">✨ Custom / Any</option>
+                                <option value="startup">🚀 Startup Blueprint</option>
+                                <option value="app">📱 Mobile App</option>
+                                <option value="website">🌐 Web Platform</option>
+                                <option value="college">🎓 College Project</option>
+                                <option value="business">💼 Business Model</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-medium text-gray-400 mb-1.5">INDUSTRY VERTICAL</label>
+                            <select id="ideaCategory" class="w-full bg-[#18142c] border border-purple-900/60 rounded-xl px-3 py-2 text-xs text-gray-200 focus:border-purple-400">
+                                <option value="none">🔍 General / Custom</option>
+                                <option value="AI / Machine Learning">🧠 AI / Deep Tech</option>
+                                <option value="Fintech">💰 Fintech</option>
+                                <option value="EdTech">📚 EdTech</option>
+                                <option value="Healthcare">🏥 HealthTech</option>
+                                <option value="E-Commerce">🛒 E‑Commerce</option>
+                                <option value="Sustainability">🌱 Climate Tech</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <form id="generatorForm" onsubmit="generateIdea(event)" class="space-y-4">
+                        <textarea id="promptInput" rows="3" class="w-full bg-[#18142c] border border-purple-900/50 rounded-xl p-3 text-sm text-gray-200 placeholder:text-gray-500 focus:border-purple-400 resize-none transition" placeholder="Describe your vision: e.g., 'An AI co-pilot that turns meeting notes into actionable product specs'"></textarea>
+                        <div class="flex gap-2">
+                            <button type="submit" class="flex-1 glow-gradient text-white text-sm font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 shadow-xl">
+                                <i class="fa-regular fa-gem text-xs"></i> <span>synthesize concept</span>
+                            </button>
+                            <button type="button" onclick="resetFullWorkspace()" class="bg-[#1a1530] hover:bg-[#2a2148] text-gray-300 px-4 rounded-xl border border-purple-800/50 transition" title="reset everything">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="mt-6 pt-4 border-t border-purple-900/40">
+                        <div class="flex items-center gap-1.5 mb-3">
+                            <i class="fa-regular fa-bolt text-amber-400 text-[10px]"></i>
+                            <span class="text-[10px] font-semibold text-gray-400 tracking-wider">QUICK LAUNCHERS</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="quickInject('SaaS Platform', 'An AI-powered autonomous scheduling agent that predicts deep work blocks.')" class="bg-[#16122c] hover:bg-[#1e193c] p-2 rounded-xl border border-purple-800/40 text-left transition"><div class="flex items-center gap-2"><i class="fa-regular fa-cubes text-indigo-400 text-xs"></i><span class="text-xs text-gray-200">Smart SaaS OS</span></div></button>
+                            <button onclick="quickInject('Mobile App', 'Zero-waste urban logistics: p2p delivery of surplus food using AI routing.')" class="bg-[#16122c] hover:bg-[#1e193c] p-2 rounded-xl border border-purple-800/40 text-left transition"><div class="flex items-center gap-2"><i class="fa-regular fa-mobile-notch text-purple-400 text-xs"></i><span class="text-xs text-gray-200">Impact Mobile</span></div></button>
+                            <button onclick="quickInject('E-Commerce', 'Decentralized creator merch store with on-chain royalty splits.')" class="bg-[#16122c] hover:bg-[#1e193c] p-2 rounded-xl border border-purple-800/40 text-left transition"><div class="flex items-center gap-2"><i class="fa-regular fa-shop text-pink-400 text-xs"></i><span class="text-xs text-gray-200">Web3 Commerce</span></div></button>
+                            <button onclick="quickInject('College Engineering', 'Computer vision for plant diseases using edge devices and federated learning.')" class="bg-[#16122c] hover:bg-[#1e193c] p-2 rounded-xl border border-purple-800/40 text-left transition"><div class="flex items-center gap-2"><i class="fa-regular fa-flask text-teal-400 text-xs"></i><span class="text-xs text-gray-200">EcoEdge AI</span></div></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LIVE CHAT with name generation -->
+                <div class="glass-panel rounded-2xl p-5 flex flex-col h-[400px] shadow-2xl">
+                    <div class="flex items-center gap-2 pb-2 border-b border-purple-900/40 mb-3">
+                        <i class="fa-regular fa-message-code text-purple-300 text-sm"></i>
+                        <h3 class="font-semibold text-white text-xs tracking-wider">💬 LIVE EXECUTION PLAYGROUND · NAME GENERATOR</h3>
+                    </div>
+                    <div id="chatLog" class="flex-1 overflow-y-auto space-y-3 pr-1 text-[13px] leading-relaxed">
+                        <div class="bg-purple-950/40 border border-purple-800/30 p-3 rounded-xl text-gray-300 text-xs">
+                            <i class="fa-regular fa-circle-info text-purple-300 mr-1"></i> <strong class="text-purple-200">System Ready</strong> — Type: <span class="text-indigo-300">“create 5 names for my app”</span> or <span class="text-indigo-300">“give me brand names for a fintech startup”</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 flex gap-2">
+                        <input id="chatInput" type="text" placeholder="e.g., generate names for my AI scheduling assistant" class="flex-1 bg-[#18142c] border border-purple-800/60 rounded-xl px-3 py-2.5 text-xs text-gray-200 focus:border-purple-400 transition">
+                        <button onclick="sendChatMessage()" class="bg-purple-700 hover:bg-purple-600 text-white px-4 rounded-xl transition-all text-sm"><i class="fa-regular fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL: canvas output -->
+            <div class="lg:col-span-7">
+                <div class="glass-panel rounded-2xl p-5 shadow-2xl min-h-[560px] flex flex-col">
+                    <div class="flex justify-between items-center pb-3 border-b border-purple-900/40 flex-wrap gap-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
+                            <h3 class="font-semibold text-white text-sm" id="streamTitle">innovation canvas</h3>
+                        </div>
+                        <div class="flex gap-2" id="canvasActions" style="display: none;">
+                            <button onclick="copyCanvasFull()" class="text-[11px] bg-[#1a1530] hover:bg-indigo-950/60 text-gray-300 border border-purple-800 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition"><i class="fa-regular fa-copy text-[11px]"></i> <span>copy full canvas</span></button>
+                        </div>
+                    </div>
+                    <div class="flex-1 py-5" id="outputContainer">
+                        <div id="emptyState" class="text-center max-w-sm mx-auto space-y-4">
+                            <div class="w-16 h-16 bg-[#16122c] border border-purple-800/60 rounded-2xl flex items-center justify-center mx-auto text-purple-400 text-2xl shadow-inner"><i class="fa-regular fa-compass"></i></div>
+                            <div><h4 class="text-sm font-medium text-white">no blueprint yet</h4><p class="text-xs text-gray-500 mt-1">Use the left panel to generate a full concept, or ask the chat to create brand names first.</p></div>
+                        </div>
+                        <div id="loadingState" class="hidden text-center space-y-3 py-8">
+                            <div class="relative w-10 h-10 mx-auto"><div class="absolute inset-0 border-2 border-purple-500/30 rounded-full"></div><div class="absolute inset-0 border-2 border-t-purple-400 rounded-full animate-spin"></div></div>
+                            <p class="text-[10px] font-mono text-purple-300 tracking-wider">SYNTHESIZING...</p>
+                        </div>
+                        <div id="generatedState" class="hidden space-y-6">
+                            <div class="bg-gradient-to-r from-indigo-950/40 to-purple-950/40 rounded-xl p-4 border border-purple-800/40">
+                                <div class="text-[10px] font-mono text-purple-300 mb-2 flex items-center gap-1"><i class="fa-regular fa-trademark"></i> AI-GENERATED BRAND ALTERNATIVES</div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div><div class="text-[9px] uppercase font-bold text-indigo-300 flex items-center gap-1"><i class="fa-regular fa-microchip"></i> CHATGPT STYLE</div><div id="chatgptNames" class="space-y-1.5 mt-1.5"></div></div>
+                                    <div><div class="text-[9px] uppercase font-bold text-fuchsia-300 flex items-center gap-1"><i class="fa-regular fa-sparkles"></i> GEMINI STYLE</div><div id="geminiNames" class="space-y-1.5 mt-1.5"></div></div>
+                                </div>
+                            </div>
+                            <div class="bg-[#110e22]/80 border border-purple-900/60 rounded-xl p-4 space-y-2">
+                                <span class="text-[10px] font-mono text-teal-300 block border-b border-purple-800 pb-1"><i class="fa-regular fa-flag-checkered mr-1"></i> STRATEGIC ALIGNMENT</span>
+                                <div class="grid gap-2 text-xs"><div><span class="text-gray-400 font-mono">MISSION →</span> <span id="outMission" class="text-gray-200 ml-1"></span></div><div><span class="text-gray-400 font-mono">VISION →</span> <span id="outVision" class="text-gray-200 ml-1"></span></div><div><span class="text-gray-400 font-mono">PURPOSE →</span> <span id="outPurpose" class="text-gray-300 italic ml-1"></span></div></div>
+                            </div>
+                            <div class="space-y-4 text-sm">
+                                <div><h4 class="text-xs font-bold text-white uppercase tracking-wide flex items-center gap-1.5"><i class="fa-regular fa-cube text-indigo-400"></i> 01 · core concept</h4><p id="outConcept" class="mt-1 pl-4 border-l-2 border-purple-700 text-gray-300 text-sm leading-relaxed"></p></div>
+                                <div><h4 class="text-xs font-bold text-white uppercase tracking-wide flex items-center gap-1.5"><i class="fa-regular fa-gear text-purple-400"></i> 02 · specs</h4><p id="outSpecs" class="mt-1 pl-4 border-l-2 border-purple-700 text-gray-300 text-sm leading-relaxed"></p></div>
+                                <div><h4 class="text-xs font-bold text-white uppercase tracking-wide flex items-center gap-1.5"><i class="fa-regular fa-chart-line text-pink-400"></i> 03 · market fit</h4><p id="outMarket" class="mt-1 pl-4 border-l-2 border-purple-700 text-gray-300 text-sm leading-relaxed"></p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-3 border-t border-purple-900/40 flex justify-between text-[10px] text-gray-500 font-mono"><span id="canvasStats">⚡ idle</span><span>chat name generator active</span></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // ---------- DATABASE (same as before, with full fallbacks) ----------
+        const ideaDatabase = {
+            "AI / Machine Learning": { chatgptNames: ["NeuralCore", "CortexNode", "SynapseAPI"], geminiNames: ["AuraMind", "DeepPulse", "LuminaAI"], startup: "Decentralized federated learning pipeline for privacy-preserving training.", app: "Intelligent copilot that auto-suggests workflow automations.", website: "AI model catalog with compliance scanning.", college: "Low-cost edge AI for IoT anomaly detection.", business: "Custom LLM fine-tuning platform.", specs: "Federated aggregation, real-time drift detection, model explainability.", market: "ML engineers, data privacy teams.", mission: "Democratize secure, distributed AI.", vision: "Edge-native AI that protects data sovereignty.", purpose: "Reduce cloud dependency while accelerating iteration." },
+            "Fintech": { chatgptNames: ["LedgerFlow", "QuantSafe", "VaultEngine"], geminiNames: ["ApexPay", "VeloCapital", "FluidTrust"], startup: "Micro-investment protocol with AI-driven risk allocation.", app: "Smart wallet optimizing savings and DeFi yields.", website: "Cross-border payment aggregator with fraud detection.", college: "Blockchain escrow for student projects.", business: "Automated reconciliation API.", specs: "Zero-knowledge proofs, real-time settlement.", market: "Remote workers, SMEs.", mission: "Remove friction from capital movement.", vision: "Open financial rails for the unbanked.", purpose: "Lower transaction overhead." },
+            "EdTech": { chatgptNames: ["LexisCore", "EduEngine", "SkillMatrix"], geminiNames: ["ScholarsHub", "NovaLearn", "CurvMind"], startup: "Adaptive curriculum engine using metacognitive traces.", app: "Micro-learning with AI tutor.", website: "Open textbook ecosystem with simulations.", college: "AI lab report evaluator.", business: "Corporate upskilling simulator.", specs: "Gamification, knowledge graph, LTI integration.", market: "Universities, bootcamps.", mission: "Make learning adaptive.", vision: "Skills-first credentialing.", purpose: "Close skill gaps with precision." },
+            "Healthcare": { chatgptNames: ["BioPulse", "HelixNode", "SanoKit"], geminiNames: ["OmniHealth", "VividCure", "AuraClinic"], startup: "Wearable analytics predicting chronic flare-ups.", app: "Medication adherence coach.", website: "Telehealth triage system.", college: "Pathology slide analyzer.", business: "Hospital capacity planner.", specs: "HIPAA-ready, edge inference, health graphs.", market: "Remote monitoring providers.", mission: "Shift to predictive healthcare.", vision: "Continuous patient intelligence.", purpose: "Reduce readmissions." },
+            "E-Commerce": { chatgptNames: ["CartVelo", "OmniVend", "NexusShelf"], geminiNames: ["StitchAI", "SproutMarket", "VeloTrade"], startup: "Hyperlocal inventory sharing for zero-emission delivery.", app: "AR size advisor reducing returns.", website: "Live shopping with AI host.", college: "Supply chain waste tracker.", business: "Dynamic pricing engine.", specs: "Visual search, one-click checkout.", market: "Eco-conscious brands.", mission: "Reinvent commerce with zero waste.", vision: "Local-first circular economy.", purpose: "Minimize carbon footprint." },
+            "Sustainability": { chatgptNames: ["EcoTrace", "GridPulse", "EnviroNode"], geminiNames: ["TerraMend", "VerdantAI", "BioSphere"], startup: "Carbon accounting API for scope 3.", app: "Community solar sharing.", website: "ESG rating platform.", college: "IoT air quality mapping.", business: "Waste reduction advisor.", specs: "Lifecycle assessment, sensor integration.", market: "Sustainability teams.", mission: "Democratize environmental transparency.", vision: "Net-positive ecosystems.", purpose: "Accelerate regenerative practices." },
+            "Custom/General": { chatgptNames: ["OmniLaunch", "ApexPrime", "DeltaCore"], geminiNames: ["VividScale", "NovaForge", "AuraPulse"], specs: "Modular architecture, real-time analytics.", market: "Innovation labs, founders.", mission: "Turn ambiguity into roadmaps.", vision: "Augmented creativity.", purpose: "Reduce time from idea to prototype." }
+        };
+        
+        let lastGenContext = { concept: "", specs: "", market: "", mission: "", vision: "", purpose: "", category: "", mode: "" };
+        
+        // Helper: generate brand names from a seed phrase or concept
+        function generateNamesFromSeed(seedText) {
+            let base = seedText.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(w => w.length > 2);
+            let keyword = base.length > 0 ? base[0] : "idea";
+            let keyword2 = base.length > 1 ? base[1] : "hub";
+            const chatNames = [
+                keyword.charAt(0).toUpperCase() + keyword.slice(1) + "Core",
+                keyword.charAt(0).toUpperCase() + keyword.slice(1) + "AI",
+                "Neural" + keyword.charAt(0).toUpperCase() + keyword.slice(1),
+                "Synapse" + keyword2.charAt(0).toUpperCase() + keyword2.slice(1)
+            ].slice(0,3);
+            const gemNames = [
+                "Aura" + keyword.charAt(0).toUpperCase() + keyword.slice(1),
+                "Vivid" + keyword2.charAt(0).toUpperCase() + keyword2.slice(1),
+                "Lumina" + keyword.charAt(0).toUpperCase() + keyword.slice(1),
+                "Nova" + keyword2.charAt(0).toUpperCase() + keyword2.slice(1)
+            ].slice(0,3);
+            return { chatNames, gemNames };
+        }
+        
+        function renderNameList(names, containerId, withCopy = true) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = names.map(name => `
+                <div class="bg-[#15112a] border border-purple-800/50 p-2 rounded-lg flex justify-between items-center group hover:border-purple-500 transition">
+                    <span class="text-xs font-semibold text-white">${escapeHtml(name)}</span>
+                    ${withCopy ? `<button onclick="copyToClipboard('${escapeHtml(name).replace(/'/g, "\\'")}')" class="text-gray-400 hover:text-indigo-300 text-[10px]"><i class="fa-regular fa-copy"></i></button>` : ''}
+                </div>
+            `).join('');
+        }
+        
+        // main concept generation (from left panel)
+        function generateIdea(e) {
+            e.preventDefault();
+            const category = document.getElementById('ideaCategory').value;
+            const mode = document.getElementById('ideaMode').value;
+            const customPrompt = document.getElementById('promptInput').value.trim();
+            if (!customPrompt && category === 'none' && mode === 'none') { alert("Please describe your idea or select a mode/category."); return; }
+            
+            document.getElementById('emptyState').classList.add('hidden');
+            document.getElementById('generatedState').classList.add('hidden');
+            document.getElementById('canvasActions').style.display = 'none';
+            document.getElementById('loadingState').classList.remove('hidden');
+            
+            setTimeout(() => {
+                const dataset = (category === 'none') ? ideaDatabase["Custom/General"] : (ideaDatabase[category] || ideaDatabase["AI / Machine Learning"]);
+                let baseConcept = customPrompt || (dataset[mode] || dataset.startup || "An advanced systemic innovation.");
+                let baseSpecs = dataset.specs || ideaDatabase["Custom/General"].specs;
+                let baseMarket = dataset.market || ideaDatabase["Custom/General"].market;
+                let baseMission = dataset.mission || `Empower creators with intelligent ${customPrompt ? customPrompt.split(' ').slice(0,2).join(' ') : 'next-gen'} frameworks.`;
+                let baseVision = dataset.vision || "Seamless fusion of human creativity and autonomous AI.";
+                let basePurpose = dataset.purpose || "Accelerate from concept to validated prototype.";
+                
+                if (customPrompt && customPrompt.length > 5) {
+                    const kw = customPrompt.split(/\s+/).find(w => w.length > 4) || "solution";
+                    baseMission = `Orchestrate ${kw}-centric architectures for mission-critical environments.`;
+                    baseVision = `Redefine how ${kw} ecosystems integrate with human creativity.`;
+                    basePurpose = `Turn raw ${kw} concepts into executable roadmaps.`;
+                }
+                
+                // generate names using the concept description
+                const seed = customPrompt || baseConcept;
+                const { chatNames, gemNames } = generateNamesFromSeed(seed);
+                renderNameList(chatNames, 'chatgptNames', true);
+                renderNameList(gemNames, 'geminiNames', true);
+                
+                document.getElementById('outMission').innerText = baseMission;
+                document.getElementById('outVision').innerText = baseVision;
+                document.getElementById('outPurpose').innerText = basePurpose;
+                document.getElementById('outConcept').innerText = baseConcept;
+                document.getElementById('outSpecs').innerText = baseSpecs;
+                document.getElementById('outMarket').innerText = baseMarket;
+                
+                lastGenContext = { concept: baseConcept, specs: baseSpecs, market: baseMarket, mission: baseMission, vision: baseVision, purpose: basePurpose, category, mode };
+                
+                document.getElementById('loadingState').classList.add('hidden');
+                document.getElementById('generatedState').classList.remove('hidden');
+                document.getElementById('canvasActions').style.display = 'flex';
+                document.getElementById('canvasStats').innerHTML = `✅ generated · ${new Date().toLocaleTimeString()}`;
+                addChatMessage("system", `Concept ready. You can now ask me to generate alternative names or refine specs.`, false);
+            }, 500);
+        }
+        
+        // CHAT: detect name generation requests
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+            addChatMessage("user", msg, true);
+            input.value = '';
+            
+            setTimeout(() => {
+                const lowerMsg = msg.toLowerCase();
+                // Name generation keywords
+                const nameKeywords = ['name', 'brand', 'call it', 'suggest name', 'generate name', 'create a name', 'what should i name', 'title for'];
+                const isNameRequest = nameKeywords.some(kw => lowerMsg.includes(kw));
+                
+                if (isNameRequest) {
+                    // Extract context: if we have a generated concept, use it; otherwise use the user's message as seed
+                    let seed = lastGenContext.concept || msg;
+                    const { chatNames, gemNames } = generateNamesFromSeed(seed);
+                    const nameListHtml = `
+                        <div class="mt-2 space-y-2">
+                            <div><span class="text-indigo-300 text-[11px] font-bold">▸ ChatGPT style:</span> <span class="text-gray-200">${chatNames.join(', ')}</span></div>
+                            <div><span class="text-fuchsia-300 text-[11px] font-bold">▸ Gemini style:</span> <span class="text-gray-200">${gemNames.join(', ')}</span></div>
+                            <div class="text-[10px] text-gray-400 mt-1">💡 Click any name on the right canvas to copy it.</div>
+                        </div>
+                    `;
+                    let replyText = `✨ Here are brand name ideas based on "${seed.substring(0, 70)}":${nameListHtml}`;
+                    addChatMessage("ai", replyText, true);
+                    // also update the canvas name sections for consistency
+                    renderNameList(chatNames, 'chatgptNames', true);
+                    renderNameList(gemNames, 'geminiNames', true);
+                    // if no concept exists, show empty state note
+                    if (!lastGenContext.concept) {
+                        addChatMessage("system", "Tip: You can also use the left panel to generate a full concept (mission, specs, market).", false);
+                    }
+                } 
+                else {
+                    // regular contextual response
+                    let reply = "";
+                    if (!lastGenContext.concept) {
+                        reply = "💡 No active concept yet. Use the left panel to generate a full innovation blueprint, or ask me to 'generate names for my app idea'.";
+                    } else if (lowerMsg.includes('api') || lowerMsg.includes('endpoint')) {
+                        reply = `⚙️ For "${lastGenContext.concept.substring(0, 60)}...", REST API: POST /api/generate, GET /api/validate. Use Node.js + Fastify.`;
+                    } else if (lowerMsg.includes('database') || lowerMsg.includes('schema')) {
+                        reply = `🗄️ Suggested schema: users, blueprints, market_signals. PostgreSQL with pgvector for similarity search.`;
+                    } else if (lowerMsg.includes('market') || lowerMsg.includes('target')) {
+                        reply = `🎯 ${lastGenContext.market} — also consider early adopters: innovation labs, VCs, pilot partners.`;
+                    } else if (lowerMsg.includes('code') || lowerMsg.includes('script')) {
+                        reply = `📟 Flask starter: \`\`\`python\n@app.route('/synthesize')\ndef gen(): return {"context": "${lastGenContext.concept.substring(0, 50)}..."}\n\`\`\``;
+                    } else {
+                        reply = `🧠 Based on your concept: ${lastGenContext.concept.substring(0, 80)}... Ask me for name ideas, API design, or go-to-market strategy.`;
+                    }
+                    addChatMessage("ai", reply, true);
+                }
+            }, 200);
+        }
+        
+        function addChatMessage(sender, content, scroll = true) {
+            const chatDiv = document.getElementById('chatLog');
+            const isSystem = sender === 'system';
+            const bgClass = sender === 'user' ? 'bg-[#1b1635] text-right border-purple-800/40' : (isSystem ? 'bg-gray-800/40 border-gray-700/40' : 'bg-purple-950/50 border-purple-800/40');
+            const align = sender === 'user' ? 'text-right' : 'text-left';
+            const nameLabel = sender === 'user' ? '<strong class="text-indigo-300">You:</strong>' : (sender === 'system' ? '<strong class="text-gray-400">System:</strong>' : '<strong class="text-purple-300">Idea AI:</strong>');
+            chatDiv.innerHTML += `<div class="${bgClass} border p-2.5 rounded-xl text-gray-200 text-xs ${align}">${nameLabel} ${content}</div>`;
+            if (scroll) chatDiv.scrollTop = chatDiv.scrollHeight;
+        }
+        
+        function quickInject(type, prompt) {
+            const modeSelect = document.getElementById('ideaMode');
+            const catSelect = document.getElementById('ideaCategory');
+            if (type === 'SaaS Platform') { modeSelect.value = 'business'; catSelect.value = 'AI / Machine Learning'; }
+            else if (type === 'Mobile App') { modeSelect.value = 'app'; catSelect.value = 'Sustainability'; }
+            else if (type === 'E-Commerce') { modeSelect.value = 'E-Commerce'; catSelect.value = 'E-Commerce'; }
+            else if (type === 'College Engineering') { modeSelect.value = 'college'; catSelect.value = 'AI / Machine Learning'; }
+            document.getElementById('promptInput').value = prompt;
+            generateIdea({ preventDefault: () => {} });
+        }
+        
+        function resetFullWorkspace() {
+            document.getElementById('promptInput').value = '';
+            document.getElementById('ideaMode').value = 'none';
+            document.getElementById('ideaCategory').value = 'none';
+            document.getElementById('emptyState').classList.remove('hidden');
+            document.getElementById('generatedState').classList.add('hidden');
+            document.getElementById('canvasActions').style.display = 'none';
+            document.getElementById('canvasStats').innerText = '⚡ idle';
+            document.getElementById('chatLog').innerHTML = `<div class="bg-purple-950/40 border border-purple-800/30 p-3 rounded-xl text-gray-300 text-xs"><i class="fa-regular fa-circle-info text-purple-300 mr-1"></i> <strong class="text-purple-200">System Ready</strong> — Type “create names for my fintech app” or generate a full concept.</div>`;
+            lastGenContext = { concept: "", specs: "", market: "", mission: "", vision: "", purpose: "", category: "", mode: "" };
+        }
+        
+        function copyToClipboard(text) { navigator.clipboard.writeText(text); alert(`✨ "${text}" copied`); }
+        function copyCanvasFull() {
+            if (!lastGenContext.concept) { alert("No concept generated. Please generate one first."); return; }
+            const content = `MISSION: ${lastGenContext.mission}\nVISION: ${lastGenContext.vision}\nPURPOSE: ${lastGenContext.purpose}\n\nCONCEPT:\n${lastGenContext.concept}\n\nSPECS:\n${lastGenContext.specs}\n\nMARKET:\n${lastGenContext.market}`;
+            navigator.clipboard.writeText(content);
+            alert("Canvas copied!");
+        }
+        function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+    </script>
+</body>
+</html>
