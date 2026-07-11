@@ -1,392 +1,1394 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Idea Space AI · Full Chat Name Generator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPTURE_BY_SAI_SUNKARA | Premium Photography & Reel Editing</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        * { font-family: 'Inter', sans-serif; }
-        body {
-            background: #0b0813;
-            background-image: radial-gradient(circle at 15% 30%, rgba(88, 28, 135, 0.2) 0%, transparent 45%),
-                              radial-gradient(circle at 85% 70%, rgba(13, 148, 136, 0.12) 0%, transparent 50%);
-        }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #120e22; border-radius: 8px; }
-        ::-webkit-scrollbar-thumb { background: #3c2e5e; border-radius: 8px; }
-        .glow-gradient {
-            background: linear-gradient(105deg, #6366f1 0%, #a855f7 100%);
-            transition: all 0.25s ease;
-        }
-        .glow-gradient:hover {
-            box-shadow: 0 0 16px rgba(168, 85, 247, 0.5);
-            filter: brightness(1.03);
-        }
-        .glass-panel {
-            background: rgba(18, 15, 34, 0.88);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(107, 70, 193, 0.25);
-        }
-        .name-copy-btn {
-            transition: all 0.1s ease;
-        }
+        body { background-color: #050505; color: #FFFFFF; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        h1, h2, h3, h4, .font-heading { font-family: 'Space Grotesk', sans-serif; }
+        .font-num { font-family: 'Poppins', sans-serif; }
+        .glass-card { background: rgba(15, 15, 15, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(220, 38, 38, 0.15); }
+        .glass-card:hover { border-color: rgba(255, 51, 51, 0.4); box-shadow: 0 0 25px rgba(220, 38, 38, 0.15); }
+        .glow-red { box-shadow: 0 0 35px rgba(220, 38, 38, 0.3); }
+        .text-glow-red { text-shadow: 0 0 12px rgba(255, 51, 51, 0.6); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #DC2626; }
+        @keyframes infinite-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .animate-infinite-scroll { display: flex; width: max-content; animation: infinite-scroll 30s linear infinite; }
+        @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+        .scanline::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent, rgba(220,38,38,0.1), transparent); animation: scanline 4s linear infinite; pointer-events: none; }
+        .pack-selected { border-color: #DC2626 !important; background: rgba(220, 38, 38, 0.1) !important; transform: scale(1.02); box-shadow: 0 0 30px rgba(220, 38, 38, 0.2); }
+        .pack-selected .pack-badge { display: block !important; }
+        .pack-badge { display: none; }
+        .captcha-box { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 12px; }
+        .captcha-text { font-family: 'Courier New', monospace; font-size: 24px; font-weight: bold; letter-spacing: 4px; color: #4ade80; text-shadow: 0 0 20px rgba(74, 222, 128, 0.3); user-select: none; }
+        .step-active { border-color: #DC2626 !important; background: rgba(220, 38, 38, 0.15) !important; }
+        .slot-available { border-color: #22c55e !important; background: rgba(34, 197, 94, 0.1) !important; }
+        .slot-selected { border-color: #DC2626 !important; background: rgba(220, 38, 38, 0.2) !important; transform: scale(1.02); }
+        .payment-timer { font-family: 'Courier New', monospace; font-size: 48px; font-weight: bold; color: #4ade80; text-shadow: 0 0 30px rgba(74, 222, 128, 0.3); }
+        .admin-table { border-collapse: collapse; width: 100%; }
+        .admin-table th, .admin-table td { padding: 10px; border: 1px solid rgba(255,255,255,0.1); text-align: left; font-size: 12px; }
+        .admin-table th { background: rgba(220, 38, 38, 0.2); color: #DC2626; }
+        .admin-table tr:hover { background: rgba(255,255,255,0.05); }
+        .app-card { background: rgba(15, 15, 15, 0.9); border: 1px solid rgba(220, 38, 38, 0.2); border-radius: 12px; padding: 16px; }
+        .app-card .label { color: #9CA3AF; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .app-card .value { color: #FFFFFF; font-weight: 500; font-size: 13px; }
+        .booking-confirm { background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(34,197,94,0.1)); border: 1px solid rgba(34,197,94,0.3); }
+        .story-card { background: rgba(15, 15, 15, 0.9); border: 1px solid rgba(220, 38, 38, 0.15); transition: all 0.3s ease; }
+        .story-card:hover { border-color: rgba(220, 38, 38, 0.5); transform: translateY(-5px); box-shadow: 0 10px 40px rgba(220, 38, 38, 0.1); }
+        .story-card .icon { color: #DC2626; }
+        .logo-caps { font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.5px; }
+        .logo-caps .white { color: #FFFFFF; }
+        .logo-caps .red { color: #DC2626; }
     </style>
 </head>
-<body class="text-gray-200 min-h-screen flex flex-col pb-10">
+<body x-data="{ 
+    mobileMenu: false, 
+    activeCategory: 'all', 
+    activePipelineStep: 1,
+    selectedStyle: 'minimal', 
+    activeFaq: null,
+    selectedPack: 'starter',
+    selectedEditor: 'trainee',
+    selectedPhotoShoot: false,
+    selectedDroneShoot: false,
+    captchaInput: '',
+    captchaCode: '',
+    showCaptchaError: false,
+    showBookingApp: false,
+    step: 1,
+    totalSteps: 5,
+    fullName: '',
+    phoneNumber: '',
+    emailId: '',
+    bookingDate: '',
+    bookingTime: '',
+    selectedSlot: null,
+    availableSlots: ['9:00 AM', '10:30 AM', '12:00 PM', '2:00 PM', '3:30 PM', '5:00 PM', '6:30 PM'],
+    district: '',
+    mandal: '',
+    address: '',
+    googleMapLink: '',
+    paymentMethod: 'cash',
+    showQR: false,
+    upiId: '',
+    screenshotFile: null,
+    isPaid: false,
+    timerSeconds: 120,
+    timerRunning: false,
+    showAdmin: false,
+    adminPassword: '',
+    adminLoggedIn: false,
+    applications: [],
+    shootId: '',
+    finalAmount: 0,
+    deliveryDate: '',
+    showAppDetails: false,
+    searchShootId: '',
+    searchPhone: '',
+    foundApplication: null,
+    showBookingSuccess: false,
+    lastSubmittedApp: null,
+    packPrices: {
+        starter: { price: 499, reels: 1, label: 'Starter Niche', days: '1 Day', type: 'Normal Video Only' },
+        creator: { price: 1999, reels: 5, label: 'Creator Volume', days: '2 Days', type: 'High/Minimal Core' },
+        pro: { price: 4999, reels: 15, label: 'Professional Scale', days: '3 Days', type: 'High/Minimal Core' },
+        enterprise: { price: 0, reels: 'Custom', label: 'Enterprise Core', days: '5 Days', type: 'High/Minimal Core' }
+    },
+    getPackPrice() { let pack = this.packPrices[this.selectedPack]; if (!pack) return 0; return pack.price; },
+    getPackReels() { let pack = this.packPrices[this.selectedPack]; if (!pack) return 0; return pack.reels; },
+    getPackLabel() { let pack = this.packPrices[this.selectedPack]; if (!pack) return ''; return pack.label; },
+    getPackDays() { let pack = this.packPrices[this.selectedPack]; if (!pack) return '1 Day'; return pack.days; },
+    getPackType() { let pack = this.packPrices[this.selectedPack]; if (!pack) return 'Normal Video Only'; return pack.type; },
+    getTurnaround() { return this.selectedStyle === 'express' ? '6-8 Hours Express' : '15-24 Hours Standard'; },
+    getEditorPrice() {
+        let prices = { 
+            trainee: { price: 0, days: '1 Day', label: 'Trainee' },
+            professional: { price: 299, days: '2 Days', label: 'Professional' },
+            expert: { price: 599, days: '3 Days', label: 'Expert' },
+            master: { price: 999, days: '5 Days', label: 'Master' }
+        };
+        return prices[this.selectedEditor] || { price: 0, days: '1 Day', label: 'Trainee' };
+    },
+    getStylePrice() { return this.selectedStyle === 'express' ? 250 : 0; },
+    getTotalPrice() {
+        let base = this.getPackPrice();
+        let editor = this.getEditorPrice().price;
+        let photo = this.selectedPhotoShoot ? 750 : 0;
+        let drone = this.selectedDroneShoot ? 1250 : 0;
+        let style = this.getStylePrice();
+        return base + editor + photo + drone + style;
+    },
+    getTodayDate() {
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0');
+        let yyyy = today.getFullYear();
+        return yyyy + '-' + mm + '-' + dd;
+    },
+    generateCaptcha() {
+        let chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        let code = '';
+        for (let i = 0; i < 6; i++) { code += chars.charAt(Math.floor(Math.random() * chars.length)); }
+        this.captchaCode = code;
+        this.captchaInput = '';
+        this.showCaptchaError = false;
+    },
+    validateCaptcha() {
+        if (this.captchaInput.toUpperCase() === this.captchaCode) {
+            this.showCaptchaError = false;
+            this.searchApplication();
+        } else {
+            this.showCaptchaError = true;
+            this.generateCaptcha();
+        }
+    },
+    searchApplication() {
+        let apps = JSON.parse(localStorage.getItem('capture_by_sai_sunkara_applications') || '[]');
+        let found = apps.find(app => app.shootId === this.searchShootId || app.phone === this.searchPhone);
+        if (found) {
+            this.foundApplication = found;
+            this.showAppDetails = true;
+            alert('✅ Application found! Shoot ID: ' + found.shootId);
+        } else {
+            this.foundApplication = null;
+            this.showAppDetails = false;
+            alert('❌ No application found with this Shoot ID or Phone Number.');
+        }
+    },
+    initBooking() {
+        this.generateShootId();
+        this.setDefaultDate();
+        this.calculateBookingTotal();
+        this.showBookingSuccess = false;
+    },
+    generateShootId() {
+        let chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+        let id = 'CS-';
+        for (let i = 0; i < 8; i++) { id += chars.charAt(Math.floor(Math.random() * chars.length)); }
+        this.shootId = id;
+        return id;
+    },
+    setDefaultDate() {
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0');
+        let yyyy = today.getFullYear();
+        this.bookingDate = yyyy + '-' + mm + '-' + dd;
+        let delivery = new Date(today);
+        delivery.setDate(delivery.getDate() + 2);
+        let ddd = String(delivery.getDate()).padStart(2, '0');
+        let mmm = String(delivery.getMonth() + 1).padStart(2, '0');
+        let yyy = delivery.getFullYear();
+        this.deliveryDate = yyy + '-' + mmm + '-' + ddd;
+    },
+    calculateBookingTotal() {
+        let base = this.getPackPrice();
+        let editor = this.getEditorPrice().price;
+        let photo = this.selectedPhotoShoot ? 750 : 0;
+        let drone = this.selectedDroneShoot ? 1250 : 0;
+        let style = this.getStylePrice();
+        let extra = this.paymentMethod === 'cash' ? 75 : 0;
+        this.finalAmount = base + editor + photo + drone + style + extra;
+        return this.finalAmount;
+    },
+    selectSlot(slot) { this.selectedSlot = slot; this.bookingTime = slot; },
+    nextStep() {
+        if (this.step < this.totalSteps) {
+            if (this.step === 1 && (!this.fullName || !this.phoneNumber || !this.emailId)) { alert('Please fill in all required fields.'); return; }
+            if (this.step === 2 && !this.selectedSlot) { alert('Please select a time slot.'); return; }
+            if (this.step === 3 && (!this.district || !this.mandal || !this.address)) { alert('Please fill in all address fields.'); return; }
+            this.step++;
+            this.calculateBookingTotal();
+        }
+    },
+    prevStep() { if (this.step > 1) this.step--; },
+    toggleBookingApp() {
+        this.showBookingApp = !this.showBookingApp;
+        if (this.showBookingApp) { this.step = 1; this.initBooking(); }
+    },
+    startTimer() {
+        this.timerSeconds = 120;
+        this.timerRunning = true;
+        let interval = setInterval(() => {
+            if (this.timerSeconds > 0) { this.timerSeconds--; } 
+            else { clearInterval(interval); this.timerRunning = false; alert('⏰ Time is up!'); }
+        }, 1000);
+    },
+    completePayment() {
+        if (this.paymentMethod === 'online') {
+            if (!this.upiId) { alert('Please enter your UPI ID.'); return; }
+            if (!this.screenshotFile) { alert('Please upload a payment screenshot.'); return; }
+            this.isPaid = true;
+            alert('✅ Payment confirmed!');
+            this.nextStep();
+        } else { this.isPaid = true; this.nextStep(); }
+    },
+    submitApplication() {
+        let app = {
+            shootId: this.shootId,
+            name: this.fullName,
+            phone: this.phoneNumber,
+            email: this.emailId,
+            pack: this.selectedPack,
+            packLabel: this.getPackLabel(),
+            reels: this.getPackReels(),
+            days: this.getPackDays(),
+            type: this.getPackType(),
+            amount: this.finalAmount,
+            date: this.bookingDate,
+            time: this.bookingTime,
+            district: this.district,
+            mandal: this.mandal,
+            address: this.address,
+            mapLink: this.googleMapLink,
+            deliveryDate: this.deliveryDate,
+            paymentMethod: this.paymentMethod,
+            editor: this.selectedEditor,
+            editorLabel: this.getEditorPrice().label,
+            style: this.selectedStyle,
+            status: 'Pending',
+            submittedAt: new Date().toLocaleString()
+        };
+        let apps = JSON.parse(localStorage.getItem('capture_by_sai_sunkara_applications') || '[]');
+        apps.push(app);
+        localStorage.setItem('capture_by_sai_sunkara_applications', JSON.stringify(apps));
+        this.applications = apps;
+        this.lastSubmittedApp = app;
+        this.showBookingSuccess = true;
+        this.showBookingApp = false;
+        this.step = 1;
+        this.fullName = '';
+        this.phoneNumber = '';
+        this.emailId = '';
+        this.selectedSlot = null;
+        this.district = '';
+        this.mandal = '';
+        this.address = '';
+        this.googleMapLink = '';
+        this.upiId = '';
+        this.screenshotFile = null;
+        this.isPaid = false;
+        this.generateShootId();
+        this.setDefaultDate();
+    },
+    loginAdmin() {
+        if (this.adminPassword === '5201314') {
+            this.adminLoggedIn = true;
+            this.applications = JSON.parse(localStorage.getItem('capture_by_sai_sunkara_applications') || '[]');
+            alert('✅ Admin login successful! Total: ' + this.applications.length + ' applications');
+        } else {
+            alert('❌ Invalid password. Use: 5201314');
+        }
+    },
+    logoutAdmin() { this.adminLoggedIn = false; this.adminPassword = ''; },
+    getTotalApplications() { return this.applications.length; },
+    clearAllData() {
+        if (confirm('⚠️ Delete all applications? This cannot be undone.')) {
+            localStorage.removeItem('capture_by_sai_sunkara_applications');
+            this.applications = [];
+            this.showBookingSuccess = false;
+            this.lastSubmittedApp = null;
+            alert('✅ All data cleared.');
+        }
+    },
+    updateApplicationStatus(shootId, status) {
+        let apps = JSON.parse(localStorage.getItem('capture_by_sai_sunkara_applications') || '[]');
+        let found = apps.find(app => app.shootId === shootId);
+        if (found) {
+            found.status = status;
+            localStorage.setItem('capture_by_sai_sunkara_applications', JSON.stringify(apps));
+            this.applications = apps;
+            alert('✅ Status updated to: ' + status);
+        }
+    },
+    loadApplications() {
+        this.applications = JSON.parse(localStorage.getItem('capture_by_sai_sunkara_applications') || '[]');
+        if (this.applications.length > 0) {
+            let lastApp = this.applications[this.applications.length - 1];
+            let now = new Date();
+            let submitted = new Date(lastApp.submittedAt);
+            let diff = (now - submitted) / (1000 * 60 * 60 * 24);
+            if (diff < 1) {
+                this.lastSubmittedApp = lastApp;
+                this.showBookingSuccess = true;
+            }
+        }
+    }
+}" x-init="generateCaptcha(); loadApplications()">
 
-    <header class="w-full max-w-7xl mx-auto px-6 py-5 flex justify-between items-center border-b border-purple-950/40 flex-wrap gap-3">
-        <div class="flex items-center space-x-3">
-            <div class="bg-gradient-to-tr from-indigo-500 to-purple-500 p-2.5 rounded-xl shadow-indigo-500/30 shadow-lg">
-                <i class="fa-solid fa-brain text-white text-xl"></i>
+    <!-- ANNOUNCEMENT BAR -->
+    <div class="bg-gradient-to-r from-red-700 via-red-600 to-red-900 text-white text-center py-2 px-4 text-xs font-medium tracking-wider relative z-50 flex justify-center items-center gap-2">
+        <span class="inline-block animate-pulse">🔥</span>
+        <span>20% OFF for First-Time Clients — Limited Time Offer</span>
+        <span class="bg-black/30 px-2 py-0.5 rounded text-[10px] uppercase font-bold">Slots filling fast</span>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
+                <span class="text-xl font-bold tracking-tight logo-caps">
+                    <span class="white">CAPTURE_BY</span><span class="red">_SAI_SUNKARA</span>
+                </span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#portfolio" class="hover:text-red-500 transition-colors">Portfolio</a>
+                <a href="#services" class="hover:text-red-500 transition-colors">Services</a>
+                <a href="#pipeline" class="hover:text-red-500 transition-colors">Pipeline</a>
+                <a href="#pricing" class="hover:text-red-500 transition-colors">Pricing</a>
+                <a href="#estimator" class="hover:text-red-500 transition-colors">Cost Estimator</a>
+                <a href="#story" class="hover:text-red-500 transition-colors">Our Story</a>
+                <a href="#faq" class="hover:text-red-500 transition-colors">FAQ</a>
             </div>
-            <div>
-                <h1 class="text-xl font-extrabold tracking-tight text-white">Idea Space AI</h1>
-                <p class="text-[11px] text-purple-300/80 font-mono">Turn Ideas into Startup-Ready Concepts Instantly</p>
+            <div class="hidden md:flex items-center gap-4">
+                <button @click="showAdmin = !showAdmin" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-user-shield mr-1"></i> Admin
+                </button>
+                <button @click="toggleBookingApp()" class="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-full font-medium text-sm transition-all shadow-lg hover:shadow-red-600/20 transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-calendar-plus mr-1"></i> Book Now
+                </button>
             </div>
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden text-gray-400 hover:text-white">
+                <i class="fa-solid text-xl" :class="mobileMenu ? 'fa-xmark' : 'fa-bars'"></i>
+            </button>
         </div>
-        <div class="flex items-center gap-3">
-            <span class="inline-flex items-center bg-emerald-950/50 border border-emerald-500/40 text-emerald-300 text-[11px] px-3 py-1.5 rounded-full font-mono font-medium">
-                <span class="w-2 h-2 bg-emerald-400 rounded-full mr-2 animate-pulse"></span> neural engine active
-            </span>
+        <div x-show="mobileMenu" x-transition class="md:hidden bg-black border-b border-white/10 p-6 space-y-4">
+            <a href="#portfolio" class="block text-gray-300 hover:text-red-500">Portfolio</a>
+            <a href="#services" class="block text-gray-300 hover:text-red-500">Services</a>
+            <a href="#pipeline" class="block text-gray-300 hover:text-red-500">Pipeline</a>
+            <a href="#pricing" class="block text-gray-300 hover:text-red-500">Pricing</a>
+            <a href="#estimator" class="block text-gray-300 hover:text-red-500">Cost Estimator</a>
+            <a href="#story" class="block text-gray-300 hover:text-red-500">Our Story</a>
+            <button @click="toggleBookingApp()" class="w-full bg-red-600 py-3 rounded-xl font-medium">Book Now</button>
         </div>
-    </header>
+    </nav>
 
-    <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 mt-7 lg:mt-10">
-        <div class="text-center mb-10">
-            <div class="inline-flex items-center gap-2 bg-purple-950/50 border border-purple-800/50 backdrop-blur-sm px-4 py-1.5 rounded-full text-purple-300 text-[11px] font-mono">
-                <i class="fa-solid fa-microchip text-[10px]"></i> Idea Space AI · v3.2 (From Idea to Startup — Instantly.)
-            </div>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mt-4 tracking-tight leading-tight">
-                Generative <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-purple-300 to-fuchsia-300">Innovation Workspace</span>
-            </h2>
-            <p class="text-gray-400 text-sm max-w-2xl mx-auto mt-3">Design startups<span class="text-purple-300 font-medium">“Ask AI “create a name for this idea””</span> – Get instant brand names.
-</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-7 items-start">
-            <!-- LEFT PANEL: composer + chat -->
-            <div class="lg:col-span-5 space-y-6">
-                <div class="glass-panel rounded-2xl p-5 shadow-2xl">
-                    <div class="flex justify-between items-center mb-4">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-sliders-h text-indigo-400 text-sm"></i>
-                            <h3 class="font-semibold text-white text-sm">idea composer</h3>
-                        </div>
-                        <span class="text-[10px] bg-indigo-950/70 text-indigo-300 px-2 py-0.5 rounded-md font-mono">context-aware</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3 mb-4">
-                        <div>
-                            <label class="block text-[11px] font-medium text-gray-400 mb-1.5">PLATFORM MODE</label>
-                            <select id="ideaMode" class="w-full bg-[#18142c] border border-purple-900/60 rounded-xl px-3 py-2 text-xs text-gray-200 focus:border-purple-400 transition">
-                                <option value="none">✨ Custom / Any</option>
-                                <option value="startup">🚀 Startup Blueprint</option>
-                                <option value="app">📱 Mobile App</option>
-                                <option value="website">🌐 Web Platform</option>
-                                <option value="college">🎓 College Project</option>
-                                <option value="business">💼 Business Model</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-medium text-gray-400 mb-1.5">INDUSTRY VERTICAL</label>
-                            <select id="ideaCategory" class="w-full bg-[#18142c] border border-purple-900/60 rounded-xl px-3 py-2 text-xs text-gray-200 focus:border-purple-400">
-                                <option value="none">🔍 General / Custom</option>
-                                <option value="AI / Machine Learning">🧠 AI / Deep Tech</option>
-                                <option value="Fintech">💰 Fintech</option>
-                                <option value="EdTech">📚 EdTech</option>
-                                <option value="Healthcare">🏥 HealthTech</option>
-                                <option value="E-Commerce">🛒 E‑Commerce</option>
-                                <option value="Sustainability">🌱 Climate Tech</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <form id="generatorForm" onsubmit="generateIdea(event)" class="space-y-4">
-                        <textarea id="promptInput" rows="3" class="w-full bg-[#18142c] border border-purple-900/50 rounded-xl p-3 text-sm text-gray-200 placeholder:text-gray-500 focus:border-purple-400 resize-none transition" placeholder="Describe your vision: e.g., 'An AI co-pilot that turns meeting notes into actionable product specs'"></textarea>
-                        <div class="flex gap-2">
-                            <button type="submit" class="flex-1 glow-gradient text-white text-sm font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2 shadow-xl">
-                                <i class="fa-regular fa-gem text-xs"></i> <span>synthesize concept</span>
-                            </button>
-                            <button type="button" onclick="resetFullWorkspace()" class="bg-[#1a1530] hover:bg-[#2a2148] text-gray-300 px-4 rounded-xl border border-purple-800/50 transition" title="reset everything">
-                                <i class="fa-regular fa-trash-can"></i>
-                            </button>
-                        </div>
-                    </form>
-
-                    <div class="mt-6 pt-4 border-t border-purple-900/40">
-                        <div class="flex items-center gap-1.5 mb-3">
-                            <i class="fa-regular fa-bolt text-amber-400 text-[10px]"></i>
-                            <span class="text-[10px] font-semibold text-gray-400 tracking-wider">QUICK LAUNCHERS</span>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="quickInject('SaaS Platform', 'An AI-powered autonomous scheduling agent that predicts deep work blocks.')" class="bg-[#16122c] hover:bg-[#1e193c] p-2 rounded-xl border border-purple-800/40 text-left transition"><div class="flex items-center gap-2"><i class="fa-regular fa-cubes text-indigo-400 text-xs"></i><span class="text-xs text-gray-200">Smart SaaS OS</span></div></button>
-                            <button onclick="quickInject('Mobile App', 'Zero-waste urban logistics: p2p delivery of surplus food using AI routing.')" class="bg-[#16122c] hover:bg-[#1e193c] p-2 rounded-xl border border-purple-800/40 text-left transition"><div class="flex items-center gap-2"><i class="fa-regular fa-mobile-notch text-purple-400 text-xs"></i><span class="text-xs text-gray-200">Impact Mobile</span></div></button>
-                            <button onclick="quickInject('E-Commerce', 'Decentralized creator merch store with on-chain royalty splits.')" class="bg-[#16122c] hover:bg-[#1e193c] p-2 rounded-xl border border-purple-800/40 text-left transition"><div class="flex items-center gap-2"><i class="fa-regular fa-shop text-pink-400 text-xs"></i><span class="text-xs text-gray-200">Web3 Commerce</span></div></button>
-                            <button onclick="quickInject('College Engineering', 'Computer vision for plant diseases using edge devices and federated learning.')" class="bg-[#16122c] hover:bg-[#1e193c] p-2 rounded-xl border border-purple-800/40 text-left transition"><div class="flex items-center gap-2"><i class="fa-regular fa-flask text-teal-400 text-xs"></i><span class="text-xs text-gray-200">EcoEdge AI</span></div></button>
-                        </div>
-                    </div>
+    <!-- HERO SECTION -->
+    <section class="relative min-h-[calc(100vh-5rem)] flex items-center justify-center overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 bg-red-950/40 border border-red-800/50 px-4 py-1.5 rounded-full text-xs text-red-400 font-medium tracking-wide">
+                    <span class="w-2 h-2 bg-red-500 rounded-full animate-ping"></span> Premium Photography & Post-Production Studio
                 </div>
-
-                <!-- LIVE CHAT with name generation -->
-                <div class="glass-panel rounded-2xl p-5 flex flex-col h-[400px] shadow-2xl">
-                    <div class="flex items-center gap-2 pb-2 border-b border-purple-900/40 mb-3">
-                        <i class="fa-regular fa-message-code text-purple-300 text-sm"></i>
-                        <h3 class="font-semibold text-white text-xs tracking-wider">💬 LIVE EXECUTION PLAYGROUND · NAME GENERATOR</h3>
-                    </div>
-                    <div id="chatLog" class="flex-1 overflow-y-auto space-y-3 pr-1 text-[13px] leading-relaxed">
-                        <div class="bg-purple-950/40 border border-purple-800/30 p-3 rounded-xl text-gray-300 text-xs">
-                            <i class="fa-regular fa-circle-info text-purple-300 mr-1"></i> <strong class="text-purple-200">System Ready</strong> — Type: <span class="text-indigo-300">“create 5 names for my app”</span> or <span class="text-indigo-300">“give me brand names for a fintech startup”</span>
-                        </div>
-                    </div>
-                    <div class="mt-3 flex gap-2">
-                        <input id="chatInput" type="text" placeholder="e.g., generate names for my AI scheduling assistant" class="flex-1 bg-[#18142c] border border-purple-800/60 rounded-xl px-3 py-2.5 text-xs text-gray-200 focus:border-purple-400 transition">
-                        <button onclick="sendChatMessage()" class="bg-purple-700 hover:bg-purple-600 text-white px-4 rounded-xl transition-all text-sm"><i class="fa-regular fa-paper-plane"></i></button>
-                    </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold font-heading tracking-tight text-white leading-[1.1]">
+                    Capturing Moments That <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-300 text-glow-red">Tell Your Story</span>
+                </h1>
+                <p class="text-gray-400 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light">
+                    Professional photography and editing services by <span class="text-red-400 font-bold">CAPTURE_BY_SAI_SUNKARA</span>. Book your slot for celebrity-style shoots, viral reels, and premium content creation.
+                </p>
+                <div class="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 text-xs text-gray-300 pt-2">
+                    <div><i class="fa-solid fa-circle-check text-red-500 mr-2"></i>Celebrity Photography</div>
+                    <div><i class="fa-solid fa-circle-check text-red-500 mr-2"></i>Viral Reel Editing</div>
+                    <div><i class="fa-solid fa-circle-check text-red-500 mr-2"></i>Unlimited Creativity</div>
                 </div>
+                <button @click="toggleBookingApp()" class="w-full sm:w-auto px-8 py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium tracking-wide shadow-lg glow-red transition-all transform hover:-translate-y-1">
+                    <i class="fa-solid fa-calendar-plus mr-2"></i> Book Your Slot Now
+                </button>
             </div>
-
-            <!-- RIGHT PANEL: canvas output -->
-            <div class="lg:col-span-7">
-                <div class="glass-panel rounded-2xl p-5 shadow-2xl min-h-[560px] flex flex-col">
-                    <div class="flex justify-between items-center pb-3 border-b border-purple-900/40 flex-wrap gap-2">
-                        <div class="flex items-center gap-2">
-                            <div class="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
-                            <h3 class="font-semibold text-white text-sm" id="streamTitle">innovation canvas</h3>
-                        </div>
-                        <div class="flex gap-2" id="canvasActions" style="display: none;">
-                            <button onclick="copyCanvasFull()" class="text-[11px] bg-[#1a1530] hover:bg-indigo-950/60 text-gray-300 border border-purple-800 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition"><i class="fa-regular fa-copy text-[11px]"></i> <span>copy full canvas</span></button>
-                        </div>
-                    </div>
-                    <div class="flex-1 py-5" id="outputContainer">
-                        <div id="emptyState" class="text-center max-w-sm mx-auto space-y-4">
-                            <div class="w-16 h-16 bg-[#16122c] border border-purple-800/60 rounded-2xl flex items-center justify-center mx-auto text-purple-400 text-2xl shadow-inner"><i class="fa-regular fa-compass"></i></div>
-                            <div><h4 class="text-sm font-medium text-white">no blueprint yet</h4><p class="text-xs text-gray-500 mt-1">Use the left panel to generate a full concept, or ask the chat to create brand names first.</p></div>
-                        </div>
-                        <div id="loadingState" class="hidden text-center space-y-3 py-8">
-                            <div class="relative w-10 h-10 mx-auto"><div class="absolute inset-0 border-2 border-purple-500/30 rounded-full"></div><div class="absolute inset-0 border-2 border-t-purple-400 rounded-full animate-spin"></div></div>
-                            <p class="text-[10px] font-mono text-purple-300 tracking-wider">SYNTHESIZING...</p>
-                        </div>
-                        <div id="generatedState" class="hidden space-y-6">
-                            <div class="bg-gradient-to-r from-indigo-950/40 to-purple-950/40 rounded-xl p-4 border border-purple-800/40">
-                                <div class="text-[10px] font-mono text-purple-300 mb-2 flex items-center gap-1"><i class="fa-regular fa-trademark"></i> AI-GENERATED BRAND ALTERNATIVES</div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div><div class="text-[9px] uppercase font-bold text-indigo-300 flex items-center gap-1"><i class="fa-regular fa-microchip"></i> CHATGPT STYLE</div><div id="chatgptNames" class="space-y-1.5 mt-1.5"></div></div>
-                                    <div><div class="text-[9px] uppercase font-bold text-fuchsia-300 flex items-center gap-1"><i class="fa-regular fa-sparkles"></i> GEMINI STYLE</div><div id="geminiNames" class="space-y-1.5 mt-1.5"></div></div>
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-[290px] h-[580px] bg-[#000000] rounded-[48px] p-3 border-4 border-neutral-800 shadow-2xl">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-4 bg-neutral-800 rounded-b-2xl z-30"></div>
+                    <div class="w-full h-full rounded-[38px] overflow-hidden relative bg-neutral-900 border border-white/5">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 z-10 pointer-events-none"></div>
+                        <div class="w-full h-full bg-gradient-to-br from-neutral-900 via-red-950/40 to-black flex items-center justify-center relative overflow-hidden scanline">
+                            <div class="absolute inset-0 flex flex-col justify-between p-6 z-20">
+                                <div class="flex justify-between items-center text-white/40 text-[10px]">
+                                    <span><i class="fa-solid fa-wifi mr-1"></i> LIVE</span>
+                                    <span class="font-num">4K 60FPS</span>
+                                </div>
+                                <div class="text-center space-y-2">
+                                    <div class="w-12 h-12 rounded-full border-2 border-red-500 flex items-center justify-center bg-black/60 mx-auto animate-pulse">
+                                        <i class="fa-solid fa-camera text-white text-sm"></i>
+                                    </div>
+                                    <span class="text-[10px] text-red-400 font-bold uppercase tracking-widest block">Tap to Preview</span>
+                                </div>
+                                <div class="text-xs text-white/90 space-y-1">
+                                    <p class="font-bold">@CAPTURE_BY_SAI_SUNKARA</p>
+                                    <p class="text-[11px] text-gray-300 line-clamp-2">How we captured viral moments for celebrities and brands ⚡</p>
                                 </div>
                             </div>
-                            <div class="bg-[#110e22]/80 border border-purple-900/60 rounded-xl p-4 space-y-2">
-                                <span class="text-[10px] font-mono text-teal-300 block border-b border-purple-800 pb-1"><i class="fa-regular fa-flag-checkered mr-1"></i> STRATEGIC ALIGNMENT</span>
-                                <div class="grid gap-2 text-xs"><div><span class="text-gray-400 font-mono">MISSION →</span> <span id="outMission" class="text-gray-200 ml-1"></span></div><div><span class="text-gray-400 font-mono">VISION →</span> <span id="outVision" class="text-gray-200 ml-1"></span></div><div><span class="text-gray-400 font-mono">PURPOSE →</span> <span id="outPurpose" class="text-gray-300 italic ml-1"></span></div></div>
-                            </div>
-                            <div class="space-y-4 text-sm">
-                                <div><h4 class="text-xs font-bold text-white uppercase tracking-wide flex items-center gap-1.5"><i class="fa-regular fa-cube text-indigo-400"></i> 01 · core concept</h4><p id="outConcept" class="mt-1 pl-4 border-l-2 border-purple-700 text-gray-300 text-sm leading-relaxed"></p></div>
-                                <div><h4 class="text-xs font-bold text-white uppercase tracking-wide flex items-center gap-1.5"><i class="fa-regular fa-gear text-purple-400"></i> 02 · specs</h4><p id="outSpecs" class="mt-1 pl-4 border-l-2 border-purple-700 text-gray-300 text-sm leading-relaxed"></p></div>
-                                <div><h4 class="text-xs font-bold text-white uppercase tracking-wide flex items-center gap-1.5"><i class="fa-regular fa-chart-line text-pink-400"></i> 03 · market fit</h4><p id="outMarket" class="mt-1 pl-4 border-l-2 border-purple-700 text-gray-300 text-sm leading-relaxed"></p></div>
-                            </div>
                         </div>
                     </div>
-                    <div class="pt-3 border-t border-purple-900/40 flex justify-between text-[10px] text-gray-500 font-mono"><span id="canvasStats">⚡ idle</span><span>chat name generator active</span></div>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
 
-    <script>
-        // ---------- DATABASE (same as before, with full fallbacks) ----------
-        const ideaDatabase = {
-            "AI / Machine Learning": { chatgptNames: ["NeuralCore", "CortexNode", "SynapseAPI"], geminiNames: ["AuraMind", "DeepPulse", "LuminaAI"], startup: "Decentralized federated learning pipeline for privacy-preserving training.", app: "Intelligent copilot that auto-suggests workflow automations.", website: "AI model catalog with compliance scanning.", college: "Low-cost edge AI for IoT anomaly detection.", business: "Custom LLM fine-tuning platform.", specs: "Federated aggregation, real-time drift detection, model explainability.", market: "ML engineers, data privacy teams.", mission: "Democratize secure, distributed AI.", vision: "Edge-native AI that protects data sovereignty.", purpose: "Reduce cloud dependency while accelerating iteration." },
-            "Fintech": { chatgptNames: ["LedgerFlow", "QuantSafe", "VaultEngine"], geminiNames: ["ApexPay", "VeloCapital", "FluidTrust"], startup: "Micro-investment protocol with AI-driven risk allocation.", app: "Smart wallet optimizing savings and DeFi yields.", website: "Cross-border payment aggregator with fraud detection.", college: "Blockchain escrow for student projects.", business: "Automated reconciliation API.", specs: "Zero-knowledge proofs, real-time settlement.", market: "Remote workers, SMEs.", mission: "Remove friction from capital movement.", vision: "Open financial rails for the unbanked.", purpose: "Lower transaction overhead." },
-            "EdTech": { chatgptNames: ["LexisCore", "EduEngine", "SkillMatrix"], geminiNames: ["ScholarsHub", "NovaLearn", "CurvMind"], startup: "Adaptive curriculum engine using metacognitive traces.", app: "Micro-learning with AI tutor.", website: "Open textbook ecosystem with simulations.", college: "AI lab report evaluator.", business: "Corporate upskilling simulator.", specs: "Gamification, knowledge graph, LTI integration.", market: "Universities, bootcamps.", mission: "Make learning adaptive.", vision: "Skills-first credentialing.", purpose: "Close skill gaps with precision." },
-            "Healthcare": { chatgptNames: ["BioPulse", "HelixNode", "SanoKit"], geminiNames: ["OmniHealth", "VividCure", "AuraClinic"], startup: "Wearable analytics predicting chronic flare-ups.", app: "Medication adherence coach.", website: "Telehealth triage system.", college: "Pathology slide analyzer.", business: "Hospital capacity planner.", specs: "HIPAA-ready, edge inference, health graphs.", market: "Remote monitoring providers.", mission: "Shift to predictive healthcare.", vision: "Continuous patient intelligence.", purpose: "Reduce readmissions." },
-            "E-Commerce": { chatgptNames: ["CartVelo", "OmniVend", "NexusShelf"], geminiNames: ["StitchAI", "SproutMarket", "VeloTrade"], startup: "Hyperlocal inventory sharing for zero-emission delivery.", app: "AR size advisor reducing returns.", website: "Live shopping with AI host.", college: "Supply chain waste tracker.", business: "Dynamic pricing engine.", specs: "Visual search, one-click checkout.", market: "Eco-conscious brands.", mission: "Reinvent commerce with zero waste.", vision: "Local-first circular economy.", purpose: "Minimize carbon footprint." },
-            "Sustainability": { chatgptNames: ["EcoTrace", "GridPulse", "EnviroNode"], geminiNames: ["TerraMend", "VerdantAI", "BioSphere"], startup: "Carbon accounting API for scope 3.", app: "Community solar sharing.", website: "ESG rating platform.", college: "IoT air quality mapping.", business: "Waste reduction advisor.", specs: "Lifecycle assessment, sensor integration.", market: "Sustainability teams.", mission: "Democratize environmental transparency.", vision: "Net-positive ecosystems.", purpose: "Accelerate regenerative practices." },
-            "Custom/General": { chatgptNames: ["OmniLaunch", "ApexPrime", "DeltaCore"], geminiNames: ["VividScale", "NovaForge", "AuraPulse"], specs: "Modular architecture, real-time analytics.", market: "Innovation labs, founders.", mission: "Turn ambiguity into roadmaps.", vision: "Augmented creativity.", purpose: "Reduce time from idea to prototype." }
-        };
-        
-        let lastGenContext = { concept: "", specs: "", market: "", mission: "", vision: "", purpose: "", category: "", mode: "" };
-        
-        // Helper: generate brand names from a seed phrase or concept
-        function generateNamesFromSeed(seedText) {
-            let base = seedText.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(w => w.length > 2);
-            let keyword = base.length > 0 ? base[0] : "idea";
-            let keyword2 = base.length > 1 ? base[1] : "hub";
-            const chatNames = [
-                keyword.charAt(0).toUpperCase() + keyword.slice(1) + "Core",
-                keyword.charAt(0).toUpperCase() + keyword.slice(1) + "AI",
-                "Neural" + keyword.charAt(0).toUpperCase() + keyword.slice(1),
-                "Synapse" + keyword2.charAt(0).toUpperCase() + keyword2.slice(1)
-            ].slice(0,3);
-            const gemNames = [
-                "Aura" + keyword.charAt(0).toUpperCase() + keyword.slice(1),
-                "Vivid" + keyword2.charAt(0).toUpperCase() + keyword2.slice(1),
-                "Lumina" + keyword.charAt(0).toUpperCase() + keyword.slice(1),
-                "Nova" + keyword2.charAt(0).toUpperCase() + keyword2.slice(1)
-            ].slice(0,3);
-            return { chatNames, gemNames };
-        }
-        
-        function renderNameList(names, containerId, withCopy = true) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            container.innerHTML = names.map(name => `
-                <div class="bg-[#15112a] border border-purple-800/50 p-2 rounded-lg flex justify-between items-center group hover:border-purple-500 transition">
-                    <span class="text-xs font-semibold text-white">${escapeHtml(name)}</span>
-                    ${withCopy ? `<button onclick="copyToClipboard('${escapeHtml(name).replace(/'/g, "\\'")}')" class="text-gray-400 hover:text-indigo-300 text-[10px]"><i class="fa-regular fa-copy"></i></button>` : ''}
+    <!-- BOOKING SUCCESS DISPLAY -->
+    <div x-show="showBookingSuccess && lastSubmittedApp" x-transition class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 mb-8">
+        <div class="booking-confirm rounded-2xl p-6 border border-green-500/30 bg-gradient-to-br from-green-950/20 to-red-950/10">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 text-xl"><i class="fa-regular fa-circle-check"></i></div>
+                <div>
+                    <h3 class="text-lg font-bold font-heading text-white">Booking Confirmed! 🎉</h3>
+                    <p class="text-xs text-gray-400">Your application has been submitted successfully</p>
                 </div>
-            `).join('');
-        }
-        
-        // main concept generation (from left panel)
-        function generateIdea(e) {
-            e.preventDefault();
-            const category = document.getElementById('ideaCategory').value;
-            const mode = document.getElementById('ideaMode').value;
-            const customPrompt = document.getElementById('promptInput').value.trim();
-            if (!customPrompt && category === 'none' && mode === 'none') { alert("Please describe your idea or select a mode/category."); return; }
-            
-            document.getElementById('emptyState').classList.add('hidden');
-            document.getElementById('generatedState').classList.add('hidden');
-            document.getElementById('canvasActions').style.display = 'none';
-            document.getElementById('loadingState').classList.remove('hidden');
-            
-            setTimeout(() => {
-                const dataset = (category === 'none') ? ideaDatabase["Custom/General"] : (ideaDatabase[category] || ideaDatabase["AI / Machine Learning"]);
-                let baseConcept = customPrompt || (dataset[mode] || dataset.startup || "An advanced systemic innovation.");
-                let baseSpecs = dataset.specs || ideaDatabase["Custom/General"].specs;
-                let baseMarket = dataset.market || ideaDatabase["Custom/General"].market;
-                let baseMission = dataset.mission || `Empower creators with intelligent ${customPrompt ? customPrompt.split(' ').slice(0,2).join(' ') : 'next-gen'} frameworks.`;
-                let baseVision = dataset.vision || "Seamless fusion of human creativity and autonomous AI.";
-                let basePurpose = dataset.purpose || "Accelerate from concept to validated prototype.";
-                
-                if (customPrompt && customPrompt.length > 5) {
-                    const kw = customPrompt.split(/\s+/).find(w => w.length > 4) || "solution";
-                    baseMission = `Orchestrate ${kw}-centric architectures for mission-critical environments.`;
-                    baseVision = `Redefine how ${kw} ecosystems integrate with human creativity.`;
-                    basePurpose = `Turn raw ${kw} concepts into executable roadmaps.`;
-                }
-                
-                // generate names using the concept description
-                const seed = customPrompt || baseConcept;
-                const { chatNames, gemNames } = generateNamesFromSeed(seed);
-                renderNameList(chatNames, 'chatgptNames', true);
-                renderNameList(gemNames, 'geminiNames', true);
-                
-                document.getElementById('outMission').innerText = baseMission;
-                document.getElementById('outVision').innerText = baseVision;
-                document.getElementById('outPurpose').innerText = basePurpose;
-                document.getElementById('outConcept').innerText = baseConcept;
-                document.getElementById('outSpecs').innerText = baseSpecs;
-                document.getElementById('outMarket').innerText = baseMarket;
-                
-                lastGenContext = { concept: baseConcept, specs: baseSpecs, market: baseMarket, mission: baseMission, vision: baseVision, purpose: basePurpose, category, mode };
-                
-                document.getElementById('loadingState').classList.add('hidden');
-                document.getElementById('generatedState').classList.remove('hidden');
-                document.getElementById('canvasActions').style.display = 'flex';
-                document.getElementById('canvasStats').innerHTML = `✅ generated · ${new Date().toLocaleTimeString()}`;
-                addChatMessage("system", `Concept ready. You can now ask me to generate alternative names or refine specs.`, false);
-            }, 500);
-        }
-        
-        // CHAT: detect name generation requests
-        function sendChatMessage() {
-            const input = document.getElementById('chatInput');
-            const msg = input.value.trim();
-            if (!msg) return;
-            addChatMessage("user", msg, true);
-            input.value = '';
-            
-            setTimeout(() => {
-                const lowerMsg = msg.toLowerCase();
-                // Name generation keywords
-                const nameKeywords = ['name', 'brand', 'call it', 'suggest name', 'generate name', 'create a name', 'what should i name', 'title for'];
-                const isNameRequest = nameKeywords.some(kw => lowerMsg.includes(kw));
-                
-                if (isNameRequest) {
-                    // Extract context: if we have a generated concept, use it; otherwise use the user's message as seed
-                    let seed = lastGenContext.concept || msg;
-                    const { chatNames, gemNames } = generateNamesFromSeed(seed);
-                    const nameListHtml = `
-                        <div class="mt-2 space-y-2">
-                            <div><span class="text-indigo-300 text-[11px] font-bold">▸ ChatGPT style:</span> <span class="text-gray-200">${chatNames.join(', ')}</span></div>
-                            <div><span class="text-fuchsia-300 text-[11px] font-bold">▸ Gemini style:</span> <span class="text-gray-200">${gemNames.join(', ')}</span></div>
-                            <div class="text-[10px] text-gray-400 mt-1">💡 Click any name on the right canvas to copy it.</div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+                <div><span class="text-gray-400">Shoot ID</span><div class="text-red-400 font-bold" x-text="lastSubmittedApp.shootId"></div></div>
+                <div><span class="text-gray-400">Name</span><div class="text-white" x-text="lastSubmittedApp.name"></div></div>
+                <div><span class="text-gray-400">Phone</span><div class="text-white" x-text="lastSubmittedApp.phone"></div></div>
+                <div><span class="text-gray-400">Plan</span><div class="text-white" x-text="lastSubmittedApp.packLabel"></div></div>
+                <div><span class="text-gray-400">Days</span><div class="text-white" x-text="lastSubmittedApp.days"></div></div>
+                <div><span class="text-gray-400">Type</span><div class="text-white" x-text="lastSubmittedApp.type"></div></div>
+                <div><span class="text-gray-400">Amount</span><div class="text-green-400 font-bold">₹<span x-text="lastSubmittedApp.amount"></span></div></div>
+                <div><span class="text-gray-400">Date</span><div class="text-white" x-text="lastSubmittedApp.date"></div></div>
+                <div><span class="text-gray-400">Time</span><div class="text-white" x-text="lastSubmittedApp.time"></div></div>
+                <div><span class="text-gray-400">Delivery</span><div class="text-green-400" x-text="lastSubmittedApp.deliveryDate"></div></div>
+                <div><span class="text-gray-400">Status</span><div class="text-yellow-400" x-text="lastSubmittedApp.status"></div></div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-white/5 text-center">
+                <p class="text-[10px] text-gray-400">Use your <span class="text-red-400 font-bold" x-text="lastSubmittedApp.shootId"></span> or Phone Number to view your application</p>
+                <button @click="showBookingSuccess = false; lastSubmittedApp = null" class="mt-2 text-xs text-gray-500 hover:text-white transition-colors">Dismiss</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATISTICS -->
+    <section class="border-y border-white/5 bg-neutral-950/60 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-y-8 gap-x-4 text-center divide-x-0 md:divide-x divide-white/5">
+                <div class="px-2"><div class="text-3xl lg:text-4xl font-bold font-num text-white">5000+</div><div class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">Shots Captured</div></div>
+                <div class="px-2"><div class="text-3xl lg:text-4xl font-bold font-num text-red-500">800+</div><div class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">Happy Clients</div></div>
+                <div class="px-2"><div class="text-3xl lg:text-4xl font-bold font-num text-white">50M+</div><div class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">Views Generated</div></div>
+                <div class="px-2"><div class="text-3xl lg:text-4xl font-bold font-num text-red-500">4.9★</div><div class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">Rating Score</div></div>
+                <div class="px-2"><div class="text-3xl lg:text-4xl font-bold font-num text-white">24 Hrs</div><div class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">Fast Delivery</div></div>
+                <div class="px-2"><div class="text-3xl lg:text-4xl font-bold font-num text-red-500">98%</div><div class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">Satisfaction Rate</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUSTED BY -->
+    <section class="py-10 bg-black overflow-hidden relative">
+        <div class="text-center text-xs font-semibold tracking-widest text-neutral-500 uppercase mb-6">Trusted by Top Creators, Celebrities & Global Brands</div>
+        <div class="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
+            <div class="animate-infinite-scroll flex items-center gap-16 text-lg font-bold tracking-widest text-neutral-600 uppercase font-heading">
+                <span>Samantha</span><span>•</span><span>Sharwanand</span><span>•</span><span>Akhil Akkineni</span><span>•</span><span>Bhagyashri</span><span>•</span><span>Influencers</span><span>•</span><span>Corporate Brands</span><span>•</span><span>Podcasters</span>
+                <span>Samantha</span><span>•</span><span>Sharwanand</span><span>•</span><span>Akhil Akkineni</span><span>•</span><span>Bhagyashri</span><span>•</span><span>Influencers</span><span>•</span><span>Corporate Brands</span><span>•</span><span>Podcasters</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR STORY SECTION -->
+    <section id="story" class="py-24 bg-black border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="text-3xl md:text-5xl font-bold font-heading">Our <span class="text-red-500">Story</span></h2>
+                <p class="text-gray-400 text-sm md:text-base">Behind every great capture is a visionary storyteller who brings moments to life through the lens.</p>
+            </div>
+
+            <!-- Featured Photographer Card -->
+            <div class="glass-card p-8 rounded-2xl border border-red-500/20 mb-12">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-32 h-32 rounded-full bg-gradient-to-br from-red-600 to-purple-600 flex items-center justify-center text-4xl font-bold text-white shrink-0">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="text-2xl font-bold font-heading text-white">CAPTURE_BY_SAI_SUNKARA</h3>
+                        <p class="text-red-400 text-sm mb-2">🎥 Visual Storyteller & Celebrity Photographer</p>
+                        <p class="text-gray-400 text-sm max-w-2xl">Sai Sunkara has famously captured high-profile Indian celebrities and events, bringing cinematic storytelling to life through his lens. His work spans across viral reels, promotional content, and iconic celebrity moments.</p>
+                        <a href="https://www.instagram.com/capture_by_sai_sunkara?igsh=MWtjbjR2ZG5iMXl2aw==" target="_blank" class="inline-flex items-center gap-2 mt-3 text-red-400 hover:text-red-300 transition-colors text-sm">
+                            <i class="fa-brands fa-instagram"></i> Follow on Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Celebrity Cards Grid - Left Image, Right Info -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Samantha Ruth Prabhu -->
+                <div class="story-card rounded-2xl overflow-hidden flex flex-col md:flex-row">
+                    <div class="w-full md:w-1/3 h-48 md:h-auto bg-gradient-to-br from-pink-500 to-red-500 flex items-center justify-center text-5xl font-bold text-white">
+                        SR
+                    </div>
+                    <div class="p-5 flex-1">
+                        <h4 class="text-lg font-bold text-white">Samantha Ruth Prabhu</h4>
+                        <p class="text-xs text-red-400 mt-1">🎬 Viral Reel Creator</p>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Filmed multiple viral promotional reels for her during her recent <span class="text-red-400">"Ma Inti Bangaram"</span> promotional success events in Vizag.</p>
+                        <span class="text-[10px] bg-red-500/10 text-red-400 px-2 py-1 rounded-full inline-block mt-3">Instagram capture... +2</span>
+                    </div>
+                </div>
+
+                <!-- Sharwanand -->
+                <div class="story-card rounded-2xl overflow-hidden flex flex-col md:flex-row">
+                    <div class="w-full md:w-1/3 h-48 md:h-auto bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-5xl font-bold text-white">
+                        SH
+                    </div>
+                    <div class="p-5 flex-1">
+                        <h4 class="text-lg font-bold text-white">Sharwanand</h4>
+                        <p class="text-xs text-red-400 mt-1">⭐ Telugu Star</p>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Captured popular <span class="text-red-400">"fan moment"</span> encounter reels featuring the charming Telugu star interacting with fans.</p>
+                        <span class="text-[10px] bg-red-500/10 text-red-400 px-2 py-1 rounded-full inline-block mt-3">Instagram Telugu Fil...</span>
+                    </div>
+                </div>
+
+                <!-- Akhil Akkineni & Bhagyashri -->
+                <div class="story-card rounded-2xl overflow-hidden flex flex-col md:flex-row">
+                    <div class="w-full md:w-1/3 h-48 md:h-auto bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center text-5xl font-bold text-white">
+                        AA
+                    </div>
+                    <div class="p-5 flex-1">
+                        <h4 class="text-lg font-bold text-white">Akhil & Bhagyashri</h4>
+                        <p class="text-xs text-red-400 mt-1">💑 Celebrity Duo</p>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Recorded their graceful arrival and promotional cutout launch events at the <span class="text-red-400">Sangam Sarat Theatre</span> in Vizag.</p>
+                        <span class="text-[10px] bg-red-500/10 text-red-400 px-2 py-1 rounded-full inline-block mt-3">Instagram capture... +2</span>
+                    </div>
+                </div>
+
+                <!-- Local Brands -->
+                <div class="story-card rounded-2xl overflow-hidden flex flex-col md:flex-row">
+                    <div class="w-full md:w-1/3 h-48 md:h-auto bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center text-5xl font-bold text-white">
+                        LB
+                    </div>
+                    <div class="p-5 flex-1">
+                        <h4 class="text-lg font-bold text-white">Local Brands & Influencers</h4>
+                        <p class="text-xs text-red-400 mt-1">🏢 Brand Storyteller</p>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Shoots promotional event videos and aesthetic makeover reels for local businesses like <span class="text-red-400">Naturals Salon</span> in Gajuwaka.</p>
+                        <span class="text-[10px] bg-red-500/10 text-red-400 px-2 py-1 rounded-full inline-block mt-3">Instagram capture... +2</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instagram Feed Preview -->
+            <div class="mt-12 glass-card p-6 rounded-2xl border border-white/5">
+                <div class="flex items-center justify-between mb-4">
+                    <h4 class="text-lg font-bold font-heading text-white">
+                        <i class="fa-brands fa-instagram text-red-400 mr-2"></i> Latest Captures
+                    </h4>
+                    <a href="https://www.instagram.com/capture_by_sai_sunkara?igsh=MWtjbjR2ZG5iMXl2aw==" target="_blank" class="text-xs text-red-400 hover:text-red-300 transition-colors">
+                        View All <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="aspect-square bg-gradient-to-br from-red-500/20 to-purple-500/20 rounded-lg border border-white/5 flex items-center justify-center text-4xl text-red-400/50 hover:scale-105 transition-transform cursor-pointer">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div class="aspect-square bg-gradient-to-br from-blue-500/20 to-pink-500/20 rounded-lg border border-white/5 flex items-center justify-center text-4xl text-red-400/50 hover:scale-105 transition-transform cursor-pointer">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div class="aspect-square bg-gradient-to-br from-green-500/20 to-yellow-500/20 rounded-lg border border-white/5 flex items-center justify-center text-4xl text-red-400/50 hover:scale-105 transition-transform cursor-pointer">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div class="aspect-square bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg border border-white/5 flex items-center justify-center text-4xl text-red-400/50 hover:scale-105 transition-transform cursor-pointer">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div class="aspect-square bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg border border-white/5 flex items-center justify-center text-4xl text-red-400/50 hover:scale-105 transition-transform cursor-pointer">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div class="aspect-square bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-lg border border-white/5 flex items-center justify-center text-4xl text-red-400/50 hover:scale-105 transition-transform cursor-pointer">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <h2 class="text-3xl md:text-5xl font-bold font-heading">Our Recent <span class="text-red-500">Masterpieces</span></h2>
+            <p class="text-gray-400 text-sm md:text-base">Filter through our diverse portfolio of photography and editing work.</p>
+            <div class="flex flex-wrap justify-center gap-2 pt-4">
+                <template x-for="cat in ['all', 'viral', 'business', 'luxury', 'podcast', 'travel']">
+                    <button @click="activeCategory = cat" :class="activeCategory === cat ? 'bg-red-600 text-white border-red-600' : 'bg-neutral-900 text-gray-400 border-white/5 hover:border-white/10'" class="px-4 py-1.5 rounded-full text-xs font-medium border capitalize transition-all duration-200" x-text="cat"></button>
+                </template>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div x-show="activeCategory === 'all' || activeCategory === 'viral'" class="glass-card rounded-2xl overflow-hidden group relative transition-all duration-300">
+                <div class="aspect-[9/16] bg-neutral-900 relative flex items-center justify-center overflow-hidden scanline">
+                    <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-red-950/30 opacity-60 group-hover:scale-105 transition-transform duration-500"></div>
+                    <i class="fa-solid fa-camera text-3xl text-white/20 group-hover:text-red-600 group-hover:scale-110 transition-all duration-300 z-10"></i>
+                    <span class="absolute top-4 left-4 bg-red-600/90 text-white font-num font-bold px-2.5 py-1 rounded text-[10px] tracking-wider uppercase z-20">1.2M+ Views</span>
+                </div>
+                <div class="p-4 border-t border-white/5 bg-black/40">
+                    <h4 class="font-heading font-bold text-white text-base">Samantha Viral Reel Capture</h4>
+                    <p class="text-xs text-gray-400 mt-1">High retention zoom cuts, pop-up text overlays, custom SFX architecture.</p>
+                </div>
+            </div>
+            <div x-show="activeCategory === 'all' || activeCategory === 'luxury'" class="glass-card rounded-2xl overflow-hidden group relative transition-all duration-300">
+                <div class="aspect-[9/16] bg-neutral-900 relative flex items-center justify-center overflow-hidden scanline">
+                    <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-neutral-900 opacity-60 group-hover:scale-105 transition-transform duration-500"></div>
+                    <i class="fa-solid fa-camera text-3xl text-white/20 group-hover:text-red-600 group-hover:scale-110 transition-all duration-300 z-10"></i>
+                    <span class="absolute top-4 left-4 bg-black/80 text-white font-num font-bold px-2.5 py-1 rounded text-[10px] tracking-wider uppercase z-20">Premium Luxury</span>
+                </div>
+                <div class="p-4 border-t border-white/5 bg-black/40">
+                    <h4 class="font-heading font-bold text-white text-base">Akhil & Bhagyashri Event Coverage</h4>
+                    <p class="text-xs text-gray-400 mt-1">Advanced speed ramping, heavy color grading nodes, seamless soundscape.</p>
+                </div>
+            </div>
+            <div x-show="activeCategory === 'all' || activeCategory === 'business' || activeCategory === 'podcast'" class="glass-card rounded-2xl overflow-hidden group relative transition-all duration-300">
+                <div class="aspect-[9/16] bg-neutral-900 relative flex items-center justify-center overflow-hidden scanline">
+                    <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-red-950/20 opacity-60 group-hover:scale-105 transition-transform duration-500"></div>
+                    <i class="fa-solid fa-camera text-3xl text-white/20 group-hover:text-red-600 group-hover:scale-110 transition-all duration-300 z-10"></i>
+                    <span class="absolute top-4 left-4 bg-red-600/90 text-white font-num font-bold px-2.5 py-1 rounded text-[10px] tracking-wider uppercase z-20">Business Promo</span>
+                </div>
+                <div class="p-4 border-t border-white/5 bg-black/40">
+                    <h4 class="font-heading font-bold text-white text-base">Naturals Salon Brand Shoot</h4>
+                    <p class="text-xs text-gray-400 mt-1">Clean corporate lower thirds, multi-cam switches, background isolation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <h2 class="text-3xl md:text-5xl font-bold font-heading">Complete <span class="text-red-500">Photography & Editing</span> Suites</h2>
+            <p class="text-gray-400 text-sm md:text-base">We handle everything from celebrity shoots to advanced post-production pipelines.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-card p-6 rounded-2xl space-y-4 transition-all">
+                <div class="w-12 h-12 bg-red-600/10 rounded-xl flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-bolt"></i></div>
+                <h3 class="text-xl font-bold font-heading text-white">Viral Reel Production</h3>
+                <p class="text-sm text-gray-400">Optimized cuts for Instagram Reels, YouTube Shorts, and TikTok platform trends configured specifically to hook fast-scrolling viewer psychology.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl space-y-4 transition-all">
+                <div class="w-12 h-12 bg-red-600/10 rounded-xl flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-crown"></i></div>
+                <h3 class="text-xl font-bold font-heading text-white">Celebrity & Corporate Shoots</h3>
+                <p class="text-sm text-gray-400">High-end product launch videos, celebrity event coverage, and commercial brand announcements utilizing complex multi-node grade workflows.</p>
+            </div>
+            <div class="glass-card p-6 rounded-2xl space-y-4 transition-all">
+                <div class="w-12 h-12 bg-red-600/10 rounded-xl flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3 class="text-xl font-bold font-heading text-white">Advanced Post Production</h3>
+                <p class="text-sm text-gray-400">Dynamic kinetic motion graphic layouts, modern AI subtitle animations, pristine noise isolations, and smart object spatial tracking arrangements.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PIPELINE -->
+    <section id="pipeline" class="py-24 bg-neutral-950/20 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading">Our Streamlined <span class="text-red-500">Production Pipeline</span></h2>
+                <p class="text-gray-400 text-sm">Click each framework processing stage parameter below to view individual quality control milestones.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-5 space-y-3">
+                    <button @click="activePipelineStep = 1" :class="activePipelineStep === 1 ? 'border-red-500 bg-red-950/20 text-white' : 'border-white/5 bg-black/40 text-gray-400'" class="w-full text-left p-5 rounded-xl border flex gap-4 transition-all duration-200">
+                        <div class="font-bold font-num text-sm text-red-500 bg-red-600/10 w-8 h-8 rounded flex items-center justify-center shrink-0">01</div>
+                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">Book Your Slot</h4><p class="text-[11px] text-gray-400 mt-0.5">Choose your service, select your preferred package, pick a convenient date and time, and confirm your booking.</p></div>
+                    </button>
+                    <button @click="activePipelineStep = 2" :class="activePipelineStep === 2 ? 'border-red-500 bg-red-950/20 text-white' : 'border-white/5 bg-black/40 text-gray-400'" class="w-full text-left p-5 rounded-xl border flex gap-4 transition-all duration-200">
+                        <div class="font-bold font-num text-sm text-red-500 bg-red-600/10 w-8 h-8 rounded flex items-center justify-center shrink-0">02</div>
+                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">Shoot Your Content</h4><p class="text-[11px] text-gray-400 mt-0.5">Record your video or capture photos using your phone or camera. Make sure the content is clear and captures everything you want us to work with.</p></div>
+                    </button>
+                    <button @click="activePipelineStep = 3" :class="activePipelineStep === 3 ? 'border-red-500 bg-red-950/20 text-white' : 'border-white/5 bg-black/40 text-gray-400'" class="w-full text-left p-5 rounded-xl border flex gap-4 transition-all duration-200">
+                        <div class="font-bold font-num text-sm text-red-500 bg-red-600/10 w-8 h-8 rounded flex items-center justify-center shrink-0">03</div>
+                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">We Edit Your Content</h4><p class="text-[11px] text-gray-400 mt-0.5">Our professional editors enhance your footage with cinematic cuts, smooth transitions, color grading, motion graphics, sound design, subtitles, and trending effects.</p></div>
+                    </button>
+                    <button @click="activePipelineStep = 4" :class="activePipelineStep === 4 ? 'border-red-500 bg-red-950/20 text-white' : 'border-white/5 bg-black/40 text-gray-400'" class="w-full text-left p-5 rounded-xl border flex gap-4 transition-all duration-200">
+                        <div class="font-bold font-num text-sm text-red-500 bg-red-600/10 w-8 h-8 rounded flex items-center justify-center shrink-0">04</div>
+                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">Review & Revisions</h4><p class="text-[11px] text-gray-400 mt-0.5">Watch the first edited version, share your feedback, and request revisions. We'll make the necessary changes until you're happy with the result.</p></div>
+                    </button>
+                    <button @click="activePipelineStep = 5" :class="activePipelineStep === 5 ? 'border-red-500 bg-red-950/20 text-white' : 'border-white/5 bg-black/40 text-gray-400'" class="w-full text-left p-5 rounded-xl border flex gap-4 transition-all duration-200">
+                        <div class="font-bold font-num text-sm text-red-500 bg-red-600/10 w-8 h-8 rounded flex items-center justify-center shrink-0">05</div>
+                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">Final Delivery</h4><p class="text-[11px] text-gray-400 mt-0.5">Deploying polished 4K content rendering files to your system dashboard link.</p></div>
+                    </button>
+                </div>
+                <div class="lg:col-span-7 bg-neutral-950 p-6 sm:p-8 rounded-2xl border border-white/10 min-h-[340px] flex flex-col justify-between scanline relative">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
+                            <span class="text-[10px] font-bold font-num text-red-400 uppercase tracking-widest">Active Studio Monitor Logging</span>
                         </div>
-                    `;
-                    let replyText = `✨ Here are brand name ideas based on "${seed.substring(0, 70)}":${nameListHtml}`;
-                    addChatMessage("ai", replyText, true);
-                    // also update the canvas name sections for consistency
-                    renderNameList(chatNames, 'chatgptNames', true);
-                    renderNameList(gemNames, 'geminiNames', true);
-                    // if no concept exists, show empty state note
-                    if (!lastGenContext.concept) {
-                        addChatMessage("system", "Tip: You can also use the left panel to generate a full concept (mission, specs, market).", false);
-                    }
-                } 
-                else {
-                    // regular contextual response
-                    let reply = "";
-                    if (!lastGenContext.concept) {
-                        reply = "💡 No active concept yet. Use the left panel to generate a full innovation blueprint, or ask me to 'generate names for my app idea'.";
-                    } else if (lowerMsg.includes('api') || lowerMsg.includes('endpoint')) {
-                        reply = `⚙️ For "${lastGenContext.concept.substring(0, 60)}...", REST API: POST /api/generate, GET /api/validate. Use Node.js + Fastify.`;
-                    } else if (lowerMsg.includes('database') || lowerMsg.includes('schema')) {
-                        reply = `🗄️ Suggested schema: users, blueprints, market_signals. PostgreSQL with pgvector for similarity search.`;
-                    } else if (lowerMsg.includes('market') || lowerMsg.includes('target')) {
-                        reply = `🎯 ${lastGenContext.market} — also consider early adopters: innovation labs, VCs, pilot partners.`;
-                    } else if (lowerMsg.includes('code') || lowerMsg.includes('script')) {
-                        reply = `📟 Flask starter: \`\`\`python\n@app.route('/synthesize')\ndef gen(): return {"context": "${lastGenContext.concept.substring(0, 50)}..."}\n\`\`\``;
-                    } else {
-                        reply = `🧠 Based on your concept: ${lastGenContext.concept.substring(0, 80)}... Ask me for name ideas, API design, or go-to-market strategy.`;
-                    }
-                    addChatMessage("ai", reply, true);
-                }
-            }, 200);
-        }
-        
-        function addChatMessage(sender, content, scroll = true) {
-            const chatDiv = document.getElementById('chatLog');
-            const isSystem = sender === 'system';
-            const bgClass = sender === 'user' ? 'bg-[#1b1635] text-right border-purple-800/40' : (isSystem ? 'bg-gray-800/40 border-gray-700/40' : 'bg-purple-950/50 border-purple-800/40');
-            const align = sender === 'user' ? 'text-right' : 'text-left';
-            const nameLabel = sender === 'user' ? '<strong class="text-indigo-300">You:</strong>' : (sender === 'system' ? '<strong class="text-gray-400">System:</strong>' : '<strong class="text-purple-300">Idea AI:</strong>');
-            chatDiv.innerHTML += `<div class="${bgClass} border p-2.5 rounded-xl text-gray-200 text-xs ${align}">${nameLabel} ${content}</div>`;
-            if (scroll) chatDiv.scrollTop = chatDiv.scrollHeight;
-        }
-        
-        function quickInject(type, prompt) {
-            const modeSelect = document.getElementById('ideaMode');
-            const catSelect = document.getElementById('ideaCategory');
-            if (type === 'SaaS Platform') { modeSelect.value = 'business'; catSelect.value = 'AI / Machine Learning'; }
-            else if (type === 'Mobile App') { modeSelect.value = 'app'; catSelect.value = 'Sustainability'; }
-            else if (type === 'E-Commerce') { modeSelect.value = 'E-Commerce'; catSelect.value = 'E-Commerce'; }
-            else if (type === 'College Engineering') { modeSelect.value = 'college'; catSelect.value = 'AI / Machine Learning'; }
-            document.getElementById('promptInput').value = prompt;
-            generateIdea({ preventDefault: () => {} });
-        }
-        
-        function resetFullWorkspace() {
-            document.getElementById('promptInput').value = '';
-            document.getElementById('ideaMode').value = 'none';
-            document.getElementById('ideaCategory').value = 'none';
-            document.getElementById('emptyState').classList.remove('hidden');
-            document.getElementById('generatedState').classList.add('hidden');
-            document.getElementById('canvasActions').style.display = 'none';
-            document.getElementById('canvasStats').innerText = '⚡ idle';
-            document.getElementById('chatLog').innerHTML = `<div class="bg-purple-950/40 border border-purple-800/30 p-3 rounded-xl text-gray-300 text-xs"><i class="fa-regular fa-circle-info text-purple-300 mr-1"></i> <strong class="text-purple-200">System Ready</strong> — Type “create names for my fintech app” or generate a full concept.</div>`;
-            lastGenContext = { concept: "", specs: "", market: "", mission: "", vision: "", purpose: "", category: "", mode: "" };
-        }
-        
-        function copyToClipboard(text) { navigator.clipboard.writeText(text); alert(`✨ "${text}" copied`); }
-        function copyCanvasFull() {
-            if (!lastGenContext.concept) { alert("No concept generated. Please generate one first."); return; }
-            const content = `MISSION: ${lastGenContext.mission}\nVISION: ${lastGenContext.vision}\nPURPOSE: ${lastGenContext.purpose}\n\nCONCEPT:\n${lastGenContext.concept}\n\nSPECS:\n${lastGenContext.specs}\n\nMARKET:\n${lastGenContext.market}`;
-            navigator.clipboard.writeText(content);
-            alert("Canvas copied!");
-        }
-        function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-    </script>
+                        <div x-show="activePipelineStep === 1" x-transition class="space-y-3">
+                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">01 / Secure Intake Locker Portal</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Choose your service, select your preferred package, pick a convenient date and time, and confirm your booking.</p>
+                        </div>
+                        <div x-show="activePipelineStep === 2" x-transition class="space-y-3">
+                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">02 / Content Capture & Assembly</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Record your video or capture photos using your phone or camera. Make sure the content is clear and captures everything you want us to work with.</p>
+                        </div>
+                        <div x-show="activePipelineStep === 3" x-transition class="space-y-3">
+                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">03 / Visual Enhancement & Effects</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Our professional editors enhance your content with cinematic cuts, smooth transitions, color grading, motion graphics, sound design, subtitles, and trending effects.</p>
+                        </div>
+                        <div x-show="activePipelineStep === 4" x-transition class="space-y-3">
+                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">04 / Multiplatform Compliance Review</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Watch the first edited version, share your feedback, and request revisions. We'll make the necessary changes until you're happy with the result.</p>
+                        </div>
+                        <div x-show="activePipelineStep === 5" x-transition class="space-y-3">
+                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">05 / High Bit-Rate Master Delivery</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">After your approval, we'll deliver the final high-quality content, optimized and ready to post on Instagram Reels, YouTube Shorts, Facebook, TikTok, or any platform you choose.</p>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-white/5 flex flex-wrap justify-between items-center gap-4 text-xs text-neutral-500">
+                        <div>Software Active: <span class="text-gray-300 font-medium">Premiere Pro / After Effects / Lightroom CC</span></div>
+                        <button @click="toggleBookingApp()" class="text-red-500 font-bold uppercase tracking-wider hover:underline">Initiate This Workflow <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="py-24 bg-black relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <h2 class="text-3xl md:text-5xl font-bold font-heading">Choose Your <span class="text-red-500">Package</span></h2>
+                <p class="text-gray-400 text-sm">Select a tier aligned to your content creation requirements.</p>
+                <div class="text-xs text-green-400 bg-green-950/20 px-4 py-2 rounded-full inline-block border border-green-500/30">⭐ Starter selected by default - 1 Day • Normal Video Only</div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-stretch">
+                <div @click="selectedPack = 'starter'" :class="selectedPack === 'starter' ? 'pack-selected border-red-500 bg-red-950/20' : 'glass-card'" class="rounded-2xl p-6 flex flex-col justify-between transition-all relative cursor-pointer border-2">
+                    <div class="pack-badge absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white font-bold text-[9px] uppercase px-3 py-1 rounded-full tracking-widest shadow">Default</div>
+                    <div class="space-y-4">
+                        <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Starter</div>
+                        <div class="flex items-baseline gap-1"><span class="text-3xl font-bold font-num text-white">₹499</span><span class="text-xs text-gray-400">/ 1 reel</span></div>
+                        <p class="text-xs text-gray-400 border-b border-white/5 pb-4">1 Day • Normal Video Only</p>
+                        <ul class="space-y-2.5 text-xs text-gray-300">
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>1 Master HD Export</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>Basic Caption Nodes</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>Standard Audio Correction</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>48 Hours Delivery</li>
+                        </ul>
+                    </div>
+                    <div class="w-full mt-8 py-3 rounded-xl bg-red-600/30 text-white border border-red-500/50 font-medium text-xs tracking-wide text-center block">✓ Selected</div>
+                </div>
+                <div @click="selectedPack = 'creator'" :class="selectedPack === 'creator' ? 'pack-selected border-red-500 bg-red-950/20' : 'glass-card'" class="rounded-2xl p-6 flex flex-col justify-between transition-all relative cursor-pointer border-2 border-red-500/30 bg-neutral-950/80">
+                    <div class="pack-badge absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white font-bold text-[9px] uppercase px-3 py-1 rounded-full tracking-widest shadow">Selected</div>
+                    <div class="space-y-4">
+                        <div class="text-xs font-bold uppercase tracking-widest text-red-400">Creator</div>
+                        <div class="flex items-baseline gap-1"><span class="text-3xl font-bold font-num text-white">₹1,999</span><span class="text-xs text-gray-400">/ 5 reels</span></div>
+                        <p class="text-xs text-gray-400 border-b border-white/5 pb-4">2 Days • High/Minimal Core</p>
+                        <ul class="space-y-2.5 text-xs text-gray-300">
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>5 Premium Reels</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>Premium Transitions</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>Enhanced Color Correction</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>Advanced Sound Design</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>24 Hours Priority</li>
+                        </ul>
+                    </div>
+                    <div class="w-full mt-8 py-3 rounded-xl bg-red-600/50 text-white font-medium text-xs tracking-wide text-center block">Select Plan</div>
+                </div>
+                <div @click="selectedPack = 'pro'" :class="selectedPack === 'pro' ? 'pack-selected border-red-500 bg-red-950/20' : 'glass-card'" class="rounded-2xl p-6 flex flex-col justify-between transition-all relative cursor-pointer border-2 border-red-500/60 bg-gradient-to-b from-neutral-950 to-red-950/20">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white font-bold text-[9px] uppercase px-3 py-1 rounded-full tracking-widest shadow">Most Requested</span>
+                    <div class="pack-badge absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white font-bold text-[9px] uppercase px-3 py-1 rounded-full tracking-widest shadow" style="margin-top: 20px;">Selected</div>
+                    <div class="space-y-4">
+                        <div class="text-xs font-bold uppercase tracking-widest text-red-400">Professional</div>
+                        <div class="flex items-baseline gap-1"><span class="text-3xl font-bold font-num text-white">₹4,999</span><span class="text-xs text-gray-400">/ 15 reels</span></div>
+                        <p class="text-xs text-gray-400 border-b border-white/5 pb-4">3 Days • High/Minimal Core</p>
+                        <ul class="space-y-2.5 text-xs text-gray-300">
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>15 Master Workpieces</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>Complex Motion Graphics</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>AI Animated Subtitles</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>Unlimited Revisions</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>VIP Support Access</li>
+                        </ul>
+                    </div>
+                    <div class="w-full mt-8 py-3 rounded-xl bg-red-600/50 text-white font-medium text-xs tracking-wide text-center block">Select Plan</div>
+                </div>
+                <div @click="selectedPack = 'enterprise'" :class="selectedPack === 'enterprise' ? 'pack-selected border-red-500 bg-red-950/20' : 'glass-card'" class="rounded-2xl p-6 flex flex-col justify-between transition-all relative cursor-pointer border-2">
+                    <div class="pack-badge absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white font-bold text-[9px] uppercase px-3 py-1 rounded-full tracking-widest shadow">Selected</div>
+                    <div class="space-y-4">
+                        <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Enterprise</div>
+                        <div class="flex items-baseline gap-1"><span class="text-2xl font-bold font-heading text-white">Custom</span></div>
+                        <p class="text-xs text-gray-400 border-b border-white/5 pb-4">5 Days • High/Minimal Core</p>
+                        <ul class="space-y-2.5 text-xs text-gray-300">
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>Unlimited Deliveries</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>Dedicated Editor</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>Script Consulting</li>
+                            <li><i class="fa-solid fa-check text-red-500 mr-2"></i>Slack Channel Sync</li>
+                        </ul>
+                    </div>
+                    <div class="w-full mt-8 py-3 rounded-xl bg-white/5 text-white border border-white/10 font-medium text-xs tracking-wide text-center block">Select Plan</div>
+                </div>
+            </div>
+            <div class="mt-12 glass-card p-6 rounded-2xl border border-red-500/30 bg-gradient-to-b from-neutral-950 to-red-950/10">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div><div class="text-xs text-gray-400 uppercase tracking-widest">Selected Plan</div><div class="text-xl font-bold font-heading text-white" x-text="getPackLabel()"></div><div class="text-sm text-gray-400" x-text="getPackReels() + ' Reels • ' + getPackDays()"></div></div>
+                    <div><div class="text-xs text-gray-400 uppercase tracking-widest">Type</div><div class="text-sm font-bold text-white" x-text="getPackType()"></div></div>
+                    <div><div class="text-xs text-gray-400 uppercase tracking-widest">Amount</div><div class="text-2xl font-bold font-num text-red-500" x-text="'₹' + getPackPrice()"></div></div>
+                    <button @click="toggleBookingApp()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-lg glow-red">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESTIMATOR -->
+    <section id="estimator" class="py-24 bg-neutral-950/30 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <h2 class="text-3xl font-bold font-heading">Choose Your <span class="text-red-500">Package & Estimate Cost</span></h2>
+                <p class="text-gray-400 text-sm">Default: Starter Plan • 1 Day • Normal Video • Trainee Editor • No Add-ons</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <div class="lg:col-span-7 bg-neutral-950 p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
+                    <div><h4 class="text-lg font-bold font-heading text-white"><i class="fa-solid fa-sliders text-red-500 mr-2"></i>Plan Tuning Parameters</h4><p class="text-xs text-gray-400 mt-1">Adjust parameters to customize your plan.</p></div>
+                    <div class="bg-black/40 p-4 rounded-xl border border-red-500/20">
+                        <div class="flex justify-between items-center">
+                            <div><span class="text-[10px] text-gray-400 uppercase tracking-widest">Selected Plan</span><div class="text-sm font-bold text-white" x-text="getPackLabel()"></div><div class="text-[10px] text-gray-500" x-text="getPackDays() + ' • ' + getPackType()"></div></div>
+                            <div class="text-right"><span class="text-[10px] text-gray-400 uppercase tracking-widest">Reels</span><div class="text-sm font-bold text-white" x-text="getPackReels() + ' Clips'"></div></div>
+                            <div class="text-right"><span class="text-[10px] text-gray-400 uppercase tracking-widest">Base Price</span><div class="text-sm font-bold text-red-500" x-text="'₹' + getPackPrice()"></div></div>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase font-bold tracking-widest text-gray-400 block">Video Editor Tier</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <div @click="selectedEditor = 'trainee'" :class="selectedEditor === 'trainee' ? 'border-red-500 bg-red-950/10' : 'border-white/5 bg-black/40'" class="p-3 rounded-xl border cursor-pointer transition-all text-center">
+                                <div class="text-xs font-bold text-white">Trainee</div><div class="text-[9px] text-gray-500">1 Day</div><div class="text-[10px] text-green-400">₹0</div>
+                            </div>
+                            <div @click="selectedEditor = 'professional'" :class="selectedEditor === 'professional' ? 'border-red-500 bg-red-950/10' : 'border-white/5 bg-black/40'" class="p-3 rounded-xl border cursor-pointer transition-all text-center">
+                                <div class="text-xs font-bold text-white">Professional</div><div class="text-[9px] text-gray-500">2 Days</div><div class="text-[10px] text-green-400">+₹299</div>
+                            </div>
+                            <div @click="selectedEditor = 'expert'" :class="selectedEditor === 'expert' ? 'border-red-500 bg-red-950/10' : 'border-white/5 bg-black/40'" class="p-3 rounded-xl border cursor-pointer transition-all text-center">
+                                <div class="text-xs font-bold text-white">Expert</div><div class="text-[9px] text-gray-500">3 Days</div><div class="text-[10px] text-green-400">+₹599</div>
+                            </div>
+                            <div @click="selectedEditor = 'master'" :class="selectedEditor === 'master' ? 'border-red-500 bg-red-950/10' : 'border-white/5 bg-black/40'" class="p-3 rounded-xl border cursor-pointer transition-all text-center">
+                                <div class="text-xs font-bold text-white">Master</div><div class="text-[9px] text-gray-500">5 Days</div><div class="text-[10px] text-green-400">+₹999</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <button @click="selectedPhotoShoot = !selectedPhotoShoot" :class="selectedPhotoShoot ? 'border-red-500 bg-red-950/10 text-white' : 'border-white/5 bg-black/40 text-gray-400'" class="p-4 rounded-xl border text-left space-y-1.5 transition-all">
+                            <div class="flex justify-between items-center"><span class="text-xs font-bold uppercase tracking-wider">📸 Photo Shoot</span><i class="fa-solid text-xs text-red-500" :class="selectedPhotoShoot ? 'fa-circle-check' : 'fa-circle'"></i></div>
+                            <p class="text-[11px] text-gray-400 leading-normal">Professional photo shoot coverage with editing</p><div class="text-[10px] text-green-400">+₹750</div>
+                        </button>
+                        <button @click="selectedDroneShoot = !selectedDroneShoot" :class="selectedDroneShoot ? 'border-red-500 bg-red-950/10 text-white' : 'border-white/5 bg-black/40 text-gray-400'" class="p-4 rounded-xl border text-left space-y-1.5 transition-all">
+                            <div class="flex justify-between items-center"><span class="text-xs font-bold uppercase tracking-wider">🎬 Drone Shoot</span><i class="fa-solid text-xs text-red-500" :class="selectedDroneShoot ? 'fa-circle-check' : 'fa-circle'"></i></div>
+                            <p class="text-[11px] text-gray-400 leading-normal">Cinematic drone aerial footage with color grading</p><div class="text-[10px] text-green-400">+₹1,250</div>
+                        </button>
+                    </div>
+                    <div class="space-y-2 pt-2">
+                        <label class="text-[10px] uppercase font-bold tracking-widest text-gray-400 block">Thematic Style</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div @click="selectedStyle = 'minimal'" :class="selectedStyle === 'minimal' ? 'border-red-600 bg-red-950/10' : 'border-white/5 bg-black/40'" class="p-3 rounded-xl border cursor-pointer transition-all flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                                <div><div class="text-xs font-bold text-white">High/Minimal Core</div><div class="text-[8px] text-gray-500">15-24 Hours • ₹0</div></div>
+                            </div>
+                            <div @click="selectedStyle = 'express'" :class="selectedStyle === 'express' ? 'border-red-600 bg-red-950/10' : 'border-white/5 bg-black/40'" class="p-3 rounded-xl border cursor-pointer transition-all flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+                                <div><div class="text-xs font-bold text-white">Express Viral Core</div><div class="text-[8px] text-green-400">6-8 Hours • +₹250</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 glass-card p-6 sm:p-8 rounded-2xl flex flex-col justify-between border-red-500/30 bg-gradient-to-b from-neutral-950 to-red-950/10 scanline relative">
+                    <div class="space-y-6">
+                        <div class="border-b border-white/5 pb-4"><h4 class="text-lg font-bold font-heading text-white">Investment Summary</h4><p class="text-[11px] text-gray-400 mt-0.5">Based on your selections.</p></div>
+                        <div class="space-y-3 text-xs">
+                            <div class="flex justify-between text-gray-400"><span>Plan (<span x-text="getPackLabel()"></span>):</span><span class="font-num text-white font-medium" x-text="'₹' + getPackPrice()"></span></div>
+                            <div class="flex justify-between text-gray-400"><span>Editor (<span x-text="getEditorPrice().label + ' (' + getEditorPrice().days + ')'"></span>):</span><span class="font-num text-white font-medium" x-text="'₹' + getEditorPrice().price"></span></div>
+                            <div class="flex justify-between text-gray-400"><span>📸 Photo:</span><span class="font-num text-white font-medium" x-text="selectedPhotoShoot ? '₹750' : '₹0'"></span></div>
+                            <div class="flex justify-between text-gray-400"><span>🎬 Drone:</span><span class="font-num text-white font-medium" x-text="selectedDroneShoot ? '₹1,250' : '₹0'"></span></div>
+                            <div class="flex justify-between text-gray-400 border-t border-white/5 pt-3"><span>Style:</span><span class="font-num text-white font-medium" x-text="selectedStyle === 'express' ? '+₹250' : '₹0'"></span></div>
+                            <div class="flex justify-between text-gray-400"><span>Turnaround:</span><span class="text-green-400 font-medium" x-text="getTurnaround()"></span></div>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-white/10 mt-8 space-y-4">
+                        <div class="flex justify-between items-end">
+                            <div><div class="text-[10px] uppercase text-gray-400 tracking-wider font-bold">Total Investment</div><div class="text-3xl font-bold font-num text-white tracking-tight">₹<span x-text="getTotalPrice()"></span></div><div class="text-[9px] text-gray-500" x-text="getPackReels() + ' Reels • ' + getPackLabel()"></div></div>
+                            <div class="text-right text-[10px] text-gray-400 bg-neutral-900 px-2 py-1 rounded border border-white/5">GST Enabled</div>
+                        </div>
+                        <button @click="toggleBookingApp()" class="w-full py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold tracking-widest text-xs text-center block shadow-lg glow-red transition-all transform hover:-translate-y-0.5 uppercase">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-24 bg-neutral-950/60 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <h2 class="text-3xl md:text-4xl font-bold font-heading">Endorsed By <span class="text-red-500">High-Performance Creators</span></h2>
+                <p class="text-gray-400 text-sm">See real feedback from clients maintaining aggressive content schedules worldwide.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="glass-card p-5 rounded-xl space-y-3">
+                    <div class="text-xs text-red-500"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-xs text-gray-300 italic">"The turnaround structural pacing is unmatched. They perfectly captured the visual layout dynamic on the first attempt without extensive correction notes required."</p>
+                    <div class="text-xs font-bold text-white font-heading mt-2">— Tech Startup Founder</div>
+                </div>
+                <div class="glass-card p-5 rounded-xl space-y-3">
+                    <div class="text-xs text-red-500"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-xs text-gray-300 italic">"Our channel retention metric jumped straight up by 34% inside two weeks of transitioning post work entirely onto their pipeline. Highly reliable system."</p>
+                    <div class="text-xs font-bold text-white font-heading mt-2">— Finance Content Creator</div>
+                </div>
+                <div class="glass-card p-5 rounded-xl space-y-3">
+                    <div class="text-xs text-red-500"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-xs text-gray-300 italic">"The flat-rate pricing simplifies project forecasting. Exceptional customer service response tracking channels via WhatsApp whenever asset shifts occur."</p>
+                    <div class="text-xs font-bold text-white font-heading mt-2">— Lifestyle Influencer</div>
+                </div>
+                <div class="glass-card p-5 rounded-xl space-y-3">
+                    <div class="text-xs text-red-500"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-xs text-gray-300 italic">"Incredible speed matching precise technical briefs. Sound effect choices are dynamic, clear audio profiles, and the final renders look stellar in 4K resolution."</p>
+                    <div class="text-xs font-bold text-white font-heading mt-2">— Real Estate Director</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STUDIO ARTISTS -->
+    <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+            <h2 class="text-3xl font-bold font-heading">The Studio <span class="text-red-500">Artists</span></h2>
+            <p class="text-gray-400 text-sm">Meet our dedicated post-production experts working across frame design assets daily.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+            <div class="p-4 bg-neutral-950 rounded-xl border border-white/5 space-y-2">
+                <div class="w-16 h-16 bg-neutral-900 rounded-full mx-auto flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-user-tie"></i></div>
+                <div class="text-sm font-bold font-heading text-white">Sai Sunkara</div><div class="text-[11px] text-gray-500">Founder & Creative Director</div>
+            </div>
+            <div class="p-4 bg-neutral-950 rounded-xl border border-white/5 space-y-2">
+                <div class="w-16 h-16 bg-neutral-900 rounded-full mx-auto flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-photo-film"></i></div>
+                <div class="text-sm font-bold font-heading text-white">Senior Editor</div><div class="text-[11px] text-gray-500">Pacing & Cut Specialist</div>
+            </div>
+            <div class="p-4 bg-neutral-950 rounded-xl border border-white/5 space-y-2">
+                <div class="w-16 h-16 bg-neutral-900 rounded-full mx-auto flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-wand-magic"></i></div>
+                <div class="text-sm font-bold font-heading text-white">Motion Designer</div><div class="text-[11px] text-gray-500">Kinetic FX Arrays</div>
+            </div>
+            <div class="p-4 bg-neutral-950 rounded-xl border border-white/5 space-y-2">
+                <div class="w-16 h-16 bg-neutral-900 rounded-full mx-auto flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-sliders"></i></div>
+                <div class="text-sm font-bold font-heading text-white">Colorist</div><div class="text-[11px] text-gray-500">DaVinci Node Mapping</div>
+            </div>
+            <div class="p-4 bg-neutral-950 rounded-xl border border-white/5 space-y-2">
+                <div class="w-16 h-16 bg-neutral-900 rounded-full mx-auto flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-headset"></i></div>
+                <div class="text-sm font-bold font-heading text-white">Support Lead</div><div class="text-[11px] text-gray-500">24/7 Client Pipelines</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 space-y-3">
+            <h2 class="text-3xl font-bold font-heading">Frequently Asked <span class="text-red-500">Inquiries</span></h2>
+            <p class="text-gray-400 text-sm">Clear operational answers regarding media transfers, licensing parameters, and revision adjustments.</p>
+        </div>
+        <div class="space-y-4">
+            <div class="border border-white/5 bg-neutral-950 rounded-xl overflow-hidden">
+                <button @click="activeFaq = activeFaq === 1 ? null : 1" class="w-full text-left p-5 font-heading font-medium text-sm sm:text-base text-white flex justify-between items-center hover:bg-neutral-900 transition-colors">
+                    <span>What does the standard turnaround processing timeframe entail?</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-red-500 transition-transform" :class="activeFaq === 1 ? 'rotate-180' : ''"></i>
+                </button>
+                <div x-show="activeFaq === 1" x-transition class="p-5 pt-0 text-xs sm:text-sm text-gray-400 border-t border-white/5 leading-relaxed bg-black/20">
+                    Standard basic single platform slots complete configuration processing within 48 hours following valid raw submission receipt loops.
+                </div>
+            </div>
+            <div class="border border-white/5 bg-neutral-950 rounded-xl overflow-hidden">
+                <button @click="activeFaq = activeFaq === 2 ? null : 2" class="w-full text-left p-5 font-heading font-medium text-sm sm:text-base text-white flex justify-between items-center hover:bg-neutral-900 transition-colors">
+                    <span>How do clients safely transmit raw video asset media directories?</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-red-500 transition-transform" :class="activeFaq === 2 ? 'rotate-180' : ''"></i>
+                </button>
+                <div x-show="activeFaq === 2" x-transition class="p-5 pt-0 text-xs sm:text-sm text-gray-400 border-t border-white/5 leading-relaxed bg-black/20">
+                    We accept standard private transmission assets drop linkages through Google Drive, Dropbox, or Frame.io architecture spaces.
+                </div>
+            </div>
+            <div class="border border-white/5 bg-neutral-950 rounded-xl overflow-hidden">
+                <button @click="activeFaq = activeFaq === 3 ? null : 3" class="w-full text-left p-5 font-heading font-medium text-sm sm:text-base text-white flex justify-between items-center hover:bg-neutral-900 transition-colors">
+                    <span>What revision safety parameters exist if an execution draft falls short?</span>
+                    <i class="fa-solid fa-chevron-down text-xs text-red-500 transition-transform" :class="activeFaq === 3 ? 'rotate-180' : ''"></i>
+                </button>
+                <div x-show="activeFaq === 3" x-transition class="p-5 pt-0 text-xs sm:text-sm text-gray-400 border-t border-white/5 leading-relaxed bg-black/20">
+                    Creator tiers carry systematic safety loops covering multi-stage structure tracking edits without additional cost additions.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO EDITOR HIGHLIGHTS & WEAVE SHOOT SHOW -->
+    <section class="py-24 bg-neutral-950/40 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <!-- Video Editor Highlights -->
+            <div class="space-y-4">
+                <h4 class="text-lg font-bold font-heading text-white">Editor Highlights</h4>
+                <div class="space-y-3">
+                    <div class="bg-black/40 p-4 rounded-xl border border-white/5 hover:border-red-500/30 transition-all">
+                        <div class="text-[10px] text-red-500 uppercase font-bold tracking-wider mb-1">🎬 Trainee</div>
+                        <h5 class="text-xs sm:text-sm font-bold text-white leading-tight">1 Day • ₹0 Extra</h5>
+                        <p class="text-[10px] text-gray-400 mt-1">Basic cuts, transitions, and standard audio sync</p>
+                    </div>
+                    <div class="bg-black/40 p-4 rounded-xl border border-white/5 hover:border-red-500/30 transition-all">
+                        <div class="text-[10px] text-orange-400 uppercase font-bold tracking-wider mb-1">⭐ Professional</div>
+                        <h5 class="text-xs sm:text-sm font-bold text-white leading-tight">2 Days • +₹299</h5>
+                        <p class="text-[10px] text-gray-400 mt-1">Advanced pacing, color grading, motion graphics</p>
+                    </div>
+                    <div class="bg-black/40 p-4 rounded-xl border border-white/5 hover:border-red-500/30 transition-all">
+                        <div class="text-[10px] text-yellow-400 uppercase font-bold tracking-wider mb-1">👑 Expert</div>
+                        <h5 class="text-xs sm:text-sm font-bold text-white leading-tight">3 Days • +₹599</h5>
+                        <p class="text-[10px] text-gray-400 mt-1">Complex multi-layer edits, custom animations, SFX</p>
+                    </div>
+                    <div class="bg-black/40 p-4 rounded-xl border border-red-500/30 transition-all">
+                        <div class="text-[10px] text-purple-400 uppercase font-bold tracking-wider mb-1">💎 Master</div>
+                        <h5 class="text-xs sm:text-sm font-bold text-white leading-tight">5 Days • +₹999</h5>
+                        <p class="text-[10px] text-gray-400 mt-1">Cinematic grade, AI subtitles, VIP treatment</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live @capture_by_sai_sunkara Feed -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h4 class="text-lg font-bold font-heading text-white">Live @CAPTURE_BY_SAI_SUNKARA</h4>
+                    <a href="https://www.instagram.com/capture_by_sai_sunkara?igsh=MWtjbjR2ZG5iMXl2aw==" target="_blank" class="text-[10px] text-red-400 hover:text-red-300 transition-colors flex items-center gap-1">
+                        <i class="fa-brands fa-instagram"></i> View All
+                    </a>
+                </div>
+                <div class="bg-black/40 p-4 rounded-xl border border-white/5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-red-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">CS</div>
+                        <div><div class="text-sm font-bold text-white">@CAPTURE_BY_SAI_SUNKARA</div><div class="text-[10px] text-gray-400">2.4M Followers • 1,284 Posts</div></div>
+                        <a href="https://www.instagram.com/capture_by_sai_sunkara?igsh=MWtjbjR2ZG5iMXl2aw==" target="_blank" class="ml-auto bg-red-600 text-white text-[10px] px-3 py-1 rounded-full font-bold">Follow</a>
+                    </div>
+                    <div class="grid grid-cols-3 gap-1">
+                        <div class="aspect-square bg-neutral-900 rounded-lg border border-white/5 flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer relative group">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">Samantha</span>
+                        </div>
+                        <div class="aspect-square bg-neutral-900 rounded-lg border border-white/5 flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer relative group">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">Sharwanand</span>
+                        </div>
+                        <div class="aspect-square bg-neutral-900 rounded-lg border border-white/5 flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer relative group">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">Akhil</span>
+                        </div>
+                        <div class="aspect-square bg-neutral-900 rounded-lg border border-white/5 flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer relative group">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">Bhagyashri</span>
+                        </div>
+                        <div class="aspect-square bg-neutral-900 rounded-lg border border-white/5 flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer relative group">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">Events</span>
+                        </div>
+                        <div class="aspect-square bg-neutral-900 rounded-lg border border-white/5 flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer relative group">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">Brands</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between text-[9px] text-gray-500 mt-3">
+                        <span><i class="fa-regular fa-eye mr-1"></i> 1.2M views today</span>
+                        <span><i class="fa-regular fa-heart mr-1"></i> 45.8k likes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weave Shoot Show -->
+            <div class="space-y-4">
+                <h4 class="text-lg font-bold font-heading text-white flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-red-500"></i> View Your Application
+                </h4>
+                <p class="text-xs text-gray-400">Enter your <span class="text-red-400">Shoot ID</span> or <span class="text-red-400">Phone Number</span> to view your application.</p>
+                <form class="space-y-3" @submit.prevent="validateCaptcha()">
+                    <input type="text" x-model="searchShootId" placeholder="Enter your Shoot ID..." class="w-full bg-neutral-950 border border-white/10 px-4 py-2.5 rounded-xl text-xs text-white focus:outline-none focus:border-red-600 transition-colors">
+                    <input type="tel" x-model="searchPhone" placeholder="Enter your Phone Number..." class="w-full bg-neutral-950 border border-white/10 px-4 py-2.5 rounded-xl text-xs text-white focus:outline-none focus:border-red-600 transition-colors">
+                    <div class="captcha-box">
+                        <div class="captcha-text" x-text="captchaCode"></div>
+                        <button type="button" @click="generateCaptcha()" class="text-white/60 hover:text-white transition-colors text-sm">
+                            <i class="fa-solid fa-rotate"></i>
+                        </button>
+                        <input type="text" placeholder="Enter CAPTCHA..." x-model="captchaInput" class="flex-1 bg-black/50 border border-white/10 px-3 py-2 rounded-lg text-xs text-white focus:outline-none focus:border-red-600 transition-colors uppercase" maxlength="6">
+                    </div>
+                    <p x-show="showCaptchaError" class="text-red-400 text-[10px] animate-pulse">❌ Invalid CAPTCHA!</p>
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs py-3 rounded-xl transition-all uppercase tracking-wider shadow-lg glow-red flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </button>
+                </form>
+
+                <div x-show="showAppDetails && foundApplication" x-transition class="app-card space-y-2">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                        <span class="text-xs text-gray-400">Application Details</span>
+                        <span class="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full" x-text="foundApplication.status"></span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 text-xs">
+                        <div><span class="label">Shoot ID</span><div class="value text-red-400 font-bold" x-text="foundApplication.shootId"></div></div>
+                        <div><span class="label">Name</span><div class="value" x-text="foundApplication.name"></div></div>
+                        <div><span class="label">Phone</span><div class="value" x-text="foundApplication.phone"></div></div>
+                        <div><span class="label">Email</span><div class="value" x-text="foundApplication.email"></div></div>
+                        <div><span class="label">Plan</span><div class="value" x-text="foundApplication.packLabel"></div></div>
+                        <div><span class="label">Days</span><div class="value" x-text="foundApplication.days"></div></div>
+                        <div><span class="label">Type</span><div class="value" x-text="foundApplication.type"></div></div>
+                        <div><span class="label">Reels</span><div class="value" x-text="foundApplication.reels"></div></div>
+                        <div><span class="label">Date</span><div class="value" x-text="foundApplication.date"></div></div>
+                        <div><span class="label">Time</span><div class="value" x-text="foundApplication.time"></div></div>
+                        <div><span class="label">Delivery</span><div class="value text-green-400" x-text="foundApplication.deliveryDate"></div></div>
+                        <div><span class="label">Amount</span><div class="value text-red-500 font-bold" x-text="'₹' + foundApplication.amount"></div></div>
+                        <div><span class="label">Payment</span><div class="value" x-text="foundApplication.paymentMethod === 'cash' ? 'Cash on Delivery' : 'Online'"></div></div>
+                        <div><span class="label">Submitted</span><div class="value text-[10px]" x-text="foundApplication.submittedAt"></div></div>
+                    </div>
+                    <div class="border-t border-white/10 pt-2">
+                        <span class="label">Location</span>
+                        <div class="value text-[11px]" x-text="foundApplication.district + ', ' + foundApplication.mandal"></div>
+                        <div class="value text-[10px] text-gray-400" x-text="foundApplication.address"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 bg-neutral-950 p-8 sm:p-12 rounded-3xl border border-white/10 relative overflow-hidden">
+            <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-red-600/5 rounded-full blur-[100px] pointer-events-none"></div>
+            <div class="lg:col-span-5 space-y-6">
+                <div class="space-y-3"><h2 class="text-3xl font-bold font-heading text-white">Request a <span class="text-red-500">Call Back for Booking</span></h2><p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Need help choosing the right plan? Fill in your details and our team will call you back within 60 minutes.</p></div>
+                <div class="space-y-3 text-xs sm:text-sm text-gray-300 pt-4">
+                    <div class="flex items-center gap-3"><i class="fa-brands fa-whatsapp text-green-500 text-base"></i><span>+91 98765 43210 (Secure Chat Support)</span></div>
+                    <div class="flex items-center gap-3"><i class="fa-solid fa-envelope text-red-500"></i><span>capture@weaveshoot.com</span></div>
+                    <div class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-neutral-500"></i><span>Premium Studio Hub, Phase II, New Delhi</span></div>
+                </div>
+                <div class="pt-6 border-t border-white/5 space-y-2">
+                    <div class="text-[10px] uppercase font-bold text-gray-500 tracking-widest">Protected Channels</div>
+                    <div class="flex flex-wrap gap-3 text-lg text-neutral-500">
+                        <i class="fa-brands fa-cc-visa hover:text-white transition-colors"></i>
+                        <i class="fa-brands fa-cc-mastercard hover:text-white transition-colors"></i>
+                        <i class="fa-brands fa-google-pay hover:text-white transition-colors"></i>
+                        <span class="text-xs font-bold tracking-tighter uppercase self-center px-1.5 py-0.5 border border-neutral-700 rounded text-neutral-400">UPI</span>
+                        <span class="text-xs font-bold tracking-tighter uppercase self-center px-1.5 py-0.5 border border-neutral-700 rounded text-neutral-400">Razorpay</span>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-7">
+                <form class="space-y-4" @submit.prevent="alert('Callback request submitted! We\'ll contact you within 60 minutes.')">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1.5"><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Full Name</label><input type="text" required placeholder="Your full name..." class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
+                        <div class="space-y-1.5"><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Phone Number</label><input type="tel" required placeholder="+91 98765 43210..." class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
+                    </div>
+                    <div class="space-y-1.5"><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Email</label><input type="email" required placeholder="you@example.com..." class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
+                    <div class="space-y-1.5"><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Preferred Plan</label>
+                        <select class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600">
+                            <option value="starter" selected>Starter — 1 Reel (₹499) • 1 Day • Normal Video</option>
+                            <option value="creator">Creator — 5 Reels (₹1,999) • 2 Days • High/Minimal</option>
+                            <option value="pro">Professional — 15 Reels (₹4,999) • 3 Days • High/Minimal</option>
+                            <option value="enterprise">Enterprise — Custom • 5 Days • High/Minimal</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1.5"><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Project Details</label><textarea rows="3" placeholder="Tell us about your project..." class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600 resize-none"></textarea></div>
+                    <div class="space-y-1.5"><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Best Time to Call</label>
+                        <select class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600">
+                            <option>Morning (9 AM - 12 PM)</option><option selected>Afternoon (12 PM - 5 PM)</option><option>Evening (5 PM - 8 PM)</option><option>Anytime</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold tracking-widest text-xs uppercase py-4 rounded-xl shadow-lg glow-red transition-all transform hover:-translate-y-0.5">Request Call Back</button>
+                    <p class="text-[9px] text-gray-500 text-center">By submitting, you agree to our <a href="#" class="text-red-400 hover:underline">Privacy Policy</a>.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING APPLICATION MODAL -->
+    <div x-show="showBookingApp" x-transition class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm" style="display:none;">
+        <div class="bg-neutral-950 rounded-3xl border border-white/10 max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 relative glass-card">
+            <button @click="showBookingApp = false" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold font-heading text-white">Book Your <span class="text-red-500">Slot</span></h2>
+                <p class="text-xs text-gray-400">Complete all steps to book your shoot</p>
+                <div class="flex justify-center gap-2 mt-3">
+                    <template x-for="i in totalSteps" :key="i">
+                        <div class="w-8 h-1 rounded-full" :class="i <= step ? 'bg-red-600' : 'bg-neutral-700'"></div>
+                    </template>
+                </div>
+                <div class="text-xs text-gray-500 mt-1">Step <span x-text="step"></span> of <span x-text="totalSteps"></span></div>
+            </div>
+
+            <!-- STEP 1 -->
+            <div x-show="step === 1" x-transition class="space-y-4">
+                <h3 class="text-lg font-bold font-heading text-white"><i class="fa-solid fa-user text-red-500 mr-2"></i>Personal Information</h3>
+                <div class="space-y-3">
+                    <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Full Name</label><input type="text" x-model="fullName" placeholder="Enter your full name..." class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
+                    <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Phone Number</label><input type="tel" x-model="phoneNumber" placeholder="+91 98765 43210..." class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
+                    <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Email ID</label><input type="email" x-model="emailId" placeholder="you@example.com..." class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
+                    <div class="bg-black/40 p-3 rounded-xl border border-red-500/20">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-gray-400">Plan: <span class="text-white font-bold" x-text="getPackLabel()"></span></span>
+                            <span class="text-gray-400">Days: <span class="text-white font-bold" x-text="getPackDays()"></span></span>
+                            <span class="text-gray-400">Amount: <span class="text-red-500 font-bold">₹<span x-text="getPackPrice()"></span></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end"><button @click="nextStep()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-all">Next <i class="fa-solid fa-arrow-right ml-1"></i></button></div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div x-show="step === 2" x-transition class="space-y-4">
+                <h3 class="text-lg font-bold font-heading text-white"><i class="fa-solid fa-calendar text-red-500 mr-2"></i>Booking Date & Time</h3>
+                <div>
+                    <label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Select Date</label>
+                    <input type="date" x-model="bookingDate" :min="getTodayDate()" class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600">
+                    <p class="text-[9px] text-gray-500 mt-1">⚠️ Only today and future dates are accepted</p>
+                </div>
+                <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400 block mb-2">Available Time Slots</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <template x-for="slot in availableSlots" :key="slot">
+                            <button @click="selectSlot(slot)" :class="selectedSlot === slot ? 'slot-selected' : 'slot-available border border-white/10'" class="p-2 rounded-xl text-xs font-medium transition-all hover:scale-105"><span x-text="slot"></span></button>
+                        </template>
+                    </div>
+                </div>
+                <div class="text-xs text-gray-500 mt-2">Delivery: <span class="text-green-400 font-bold" x-text="deliveryDate"></span> (2 days later)</div>
+                <div class="flex justify-between">
+                    <button @click="prevStep()" class="text-gray-400 hover:text-white text-sm"><i class="fa-solid fa-arrow-left mr-1"></i> Back</button>
+                    <button @click="nextStep()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-all">Next <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div x-show="step === 3" x-transition class="space-y-4">
+                <h3 class="text-lg font-bold font-heading text-white"><i class="fa-solid fa-location-dot text-red-500 mr-2"></i>Shoot Location</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">District</label><input type="text" x-model="district" placeholder="Enter district..." class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
+                    <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Mandal</label><input type="text" x-model="mandal" placeholder="Enter mandal..." class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
+                </div>
+                <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Full Address</label><textarea x-model="address" rows="2" placeholder="Enter your complete address..." class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600 resize-none"></textarea></div>
+                <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Google Maps Link</label><input type="url" x-model="googleMapLink" placeholder="Paste Google Maps link..." class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
+                <div class="flex justify-between">
+                    <button @click="prevStep()" class="text-gray-400 hover:text-white text-sm"><i class="fa-solid fa-arrow-left mr-1"></i> Back</button>
+                    <button @click="nextStep()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-all">Next <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                </div>
+            </div>
+
+            <!-- STEP 4 -->
+            <div x-show="step === 4" x-transition class="space-y-4">
+                <h3 class="text-lg font-bold font-heading text-white"><i class="fa-solid fa-credit-card text-red-500 mr-2"></i>Payment Method</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <button @click="paymentMethod = 'cash'; showQR = false; calculateBookingTotal()" :class="paymentMethod === 'cash' ? 'border-red-500 bg-red-950/20' : 'border-white/5 bg-black/40'" class="p-4 rounded-xl border transition-all">
+                        <i class="fa-solid fa-money-bill-wave text-2xl block text-green-400 mb-1"></i>
+                        <div class="text-xs font-bold">Cash on Delivery</div><div class="text-[9px] text-gray-500">+₹75</div>
+                    </button>
+                    <button @click="paymentMethod = 'online'; showQR = true; calculateBookingTotal(); startTimer()" :class="paymentMethod === 'online' ? 'border-red-500 bg-red-950/20' : 'border-white/5 bg-black/40'" class="p-4 rounded-xl border transition-all">
+                        <i class="fa-solid fa-qrcode text-2xl block text-blue-400 mb-1"></i>
+                        <div class="text-xs font-bold">Online Payment</div><div class="text-[9px] text-gray-500">UPI / QR</div>
+                    </button>
+                </div>
+                <div x-show="paymentMethod === 'online'" x-transition class="space-y-3">
+                    <div class="bg-black/40 p-4 rounded-xl border border-blue-500/20 text-center">
+                        <div class="text-xs text-gray-400">Scan to Pay</div>
+                        <div class="bg-white p-4 rounded-xl inline-block mx-auto my-2"><div class="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center"><i class="fa-solid fa-qrcode text-6xl text-white/80"></i></div></div>
+                        <div class="text-xs text-green-400">UPI: capture@pay</div>
+                    </div>
+                    <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">UPI ID</label><input type="text" x-model="upiId" placeholder="your@upi" class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
+                    <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Screenshot</label><input type="file" @change="screenshotFile = $event.target.files[0]" accept="image/*" class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
+                    <div class="bg-black/40 p-3 rounded-xl border border-white/5"><div class="flex justify-between items-center"><span class="text-xs text-gray-400">Time</span><span class="payment-timer" x-text="Math.floor(timerSeconds/60) + ':' + (timerSeconds%60).toString().padStart(2, '0')"></span></div></div>
+                    <button @click="completePayment()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold text-xs uppercase transition-all"><i class="fa-solid fa-check mr-2"></i> Confirm Payment</button>
+                </div>
+                <div x-show="paymentMethod === 'cash'" x-transition>
+                    <div class="bg-black/40 p-4 rounded-xl border border-green-500/20"><p class="text-xs text-gray-300">Pay <span class="text-green-400 font-bold">₹<span x-text="finalAmount"></span></span> cash on delivery.</p><p class="text-[10px] text-gray-500 mt-2">+₹75 extra for cash handling.</p></div>
+                    <button @click="completePayment()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold text-xs uppercase transition-all mt-3"><i class="fa-solid fa-check mr-2"></i> Confirm COD</button>
+                </div>
+                <div class="flex justify-between mt-2"><button @click="prevStep()" class="text-gray-400 hover:text-white text-sm"><i class="fa-solid fa-arrow-left mr-1"></i> Back</button></div>
+            </div>
+
+            <!-- STEP 5 -->
+            <div x-show="step === 5" x-transition class="space-y-4">
+                <h3 class="text-lg font-bold font-heading text-white"><i class="fa-solid fa-file-invoice text-red-500 mr-2"></i>Booking Summary</h3>
+                <div class="bg-black/40 p-4 rounded-xl border border-white/5 space-y-2 text-xs">
+                    <div class="flex justify-between"><span class="text-gray-400">Shoot ID</span><span class="text-red-400 font-bold" x-text="shootId"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Name</span><span x-text="fullName" class="text-white"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Phone</span><span x-text="phoneNumber" class="text-white"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Plan</span><span x-text="getPackLabel()" class="text-white"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Days</span><span x-text="getPackDays()" class="text-white"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Type</span><span x-text="getPackType()" class="text-white"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Reels</span><span x-text="getPackReels()" class="text-white"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Date</span><span x-text="bookingDate" class="text-white"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Time</span><span x-text="bookingTime || 'Not selected'" class="text-white"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Delivery</span><span class="text-green-400 font-bold" x-text="deliveryDate"></span></div>
+                </div>
+                <div class="bg-gradient-to-r from-red-950/30 to-red-950/10 p-4 rounded-xl border border-red-500/30">
+                    <div class="flex justify-between items-center"><span class="text-sm font-bold text-white">Total Amount</span><span class="text-2xl font-bold font-num text-red-500">₹<span x-text="finalAmount"></span></span></div>
+                </div>
+                <div class="flex justify-between">
+                    <button @click="prevStep()" class="text-gray-400 hover:text-white text-sm"><i class="fa-solid fa-arrow-left mr-1"></i> Back</button>
+                    <button @click="submitApplication()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-all">Submit <i class="fa-solid fa-paper-plane ml-1"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div x-show="showAdmin" x-transition class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm" style="display:none;">
+        <div class="bg-neutral-950 rounded-3xl border border-white/10 max-w-6xl w-full max-h-[90vh] overflow-y-auto p-6 relative glass-card">
+            <button @click="showAdmin = false" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <div class="text-center mb-6"><h2 class="text-2xl font-bold font-heading text-white"><i class="fa-solid fa-user-shield text-red-500 mr-2"></i>Admin Panel</h2><p class="text-xs text-gray-400">All user applications data</p></div>
+            <div x-show="!adminLoggedIn" class="max-w-sm mx-auto space-y-4">
+                <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Password</label><input type="password" x-model="adminPassword" placeholder="Enter password..." class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
+                <button @click="loginAdmin()" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl font-bold text-xs uppercase transition-all"><i class="fa-solid fa-key mr-2"></i> Login</button>
+                <p class="text-[10px] text-gray-500 text-center">Password: 5201314</p>
+            </div>
+            <div x-show="adminLoggedIn" x-transition>
+                <div class="flex justify-between items-center mb-4">
+                    <div><span class="text-xs text-gray-400">Total Applications</span><span class="text-xl font-bold text-red-500 ml-2" x-text="getTotalApplications()"></span></div>
+                    <div class="flex gap-2">
+                        <button @click="clearAllData()" class="text-xs text-red-400 hover:text-red-300 transition-colors"><i class="fa-solid fa-trash mr-1"></i> Clear All</button>
+                        <button @click="logoutAdmin()" class="text-xs text-red-400 hover:text-red-300 transition-colors"><i class="fa-solid fa-sign-out-alt mr-1"></i> Logout</button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="admin-table">
+                        <thead><tr><th>Shoot ID</th><th>Name</th><th>Phone</th><th>Email</th><th>Plan</th><th>Days</th><th>Type</th><th>Reels</th><th>Date</th><th>Time</th><th>Amount</th><th>Payment</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <template x-for="app in applications" :key="app.shootId">
+                                <tr>
+                                    <td class="text-red-400 font-bold" x-text="app.shootId"></td>
+                                    <td x-text="app.name"></td>
+                                    <td x-text="app.phone"></td>
+                                    <td x-text="app.email"></td>
+                                    <td x-text="app.packLabel"></td>
+                                    <td x-text="app.days"></td>
+                                    <td><span class="text-[10px]" :class="app.type === 'Normal Video Only' ? 'text-gray-400' : 'text-blue-400'" x-text="app.type"></span></td>
+                                    <td x-text="app.reels"></td>
+                                    <td x-text="app.date"></td>
+                                    <td x-text="app.time"></td>
+                                    <td class="text-green-400">₹<span x-text="app.amount"></span></td>
+                                    <td x-text="app.paymentMethod === 'cash' ? 'Cash' : 'Online'"></td>
+                                    <td>
+                                        <select @change="updateApplicationStatus(app.shootId, $event.target.value)" class="bg-black/50 border border-white/10 rounded px-2 py-1 text-[10px] text-white">
+                                            <option value="Pending" :selected="app.status === 'Pending'">Pending</option>
+                                            <option value="Processing" :selected="app.status === 'Processing'">Processing</option>
+                                            <option value="Completed" :selected="app.status === 'Completed'">Completed</option>
+                                            <option value="Delivered" :selected="app.status === 'Delivered'">Delivered</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </template>
+                            <tr x-show="applications.length === 0"><td colspan="13" class="text-center text-gray-500 py-8">No applications found</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 bg-black py-12 text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+            <div class="space-y-3">
+                <span class="text-base font-bold tracking-tight logo-caps">
+                    <span class="white">CAPTURE_BY</span><span class="red">_SAI_SUNKARA</span>
+                </span>
+                <p class="text-gray-400 leading-relaxed max-w-xs">Premium photography and post-production media engineering systems.</p>
+            </div>
+            <div class="space-y-2"><div class="text-white font-heading font-bold uppercase tracking-wider text-[10px]">Studio</div><a href="#services" class="block hover:text-white">Photography</a><a href="#services" class="block hover:text-white">Reel Editing</a><a href="#services" class="block hover:text-white">Sound Design</a></div>
+            <div class="space-y-2"><div class="text-white font-heading font-bold uppercase tracking-wider text-[10px]">Resources</div><a href="#faq" class="block hover:text-white">FAQ</a><a href="#portfolio" class="block hover:text-white">Portfolio</a><a href="#estimator" class="block hover:text-white">Calculator</a></div>
+            <div class="space-y-2"><div class="text-white font-heading font-bold uppercase tracking-wider text-[10px]">Legal</div><a href="#" class="block hover:text-white">Privacy</a><a href="#" class="block hover:text-white">Terms</a><a href="#" class="block hover:text-white">Refund</a></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+            <div>&copy; 2026 CAPTURE_BY_SAI_SUNKARA — Powered by SPACE FRAME MEDIA HUB</div>
+            <div class="flex gap-4 text-sm text-neutral-400">
+                <a href="https://www.instagram.com/capture_by_sai_sunkara?igsh=MWtjbjR2ZG5iMXl2aw==" target="_blank" class="hover:text-red-500"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-red-500"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-red-500"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#" class="hover:text-red-500"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE STICKY -->
+    <div class="md:hidden fixed bottom-4 left-4 right-4 z-40 flex gap-2">
+        <button @click="toggleBookingApp()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase py-3.5 rounded-xl tracking-wider text-center shadow-2xl block glow-red">Book Now</button>
+        <a href="https://wa.me/919876543210" target="_blank" class="w-12 bg-neutral-900 border border-white/10 rounded-xl flex items-center justify-center text-green-400 shadow-2xl"><i class="fa-brands fa-whatsapp text-lg"></i></a>
+    </div>
+
 </body>
 </html>
