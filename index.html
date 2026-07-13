@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAPTURE_BY_SAI_SUNKARA | Premium Photography & Reel Editing</title>
+    <title>     WEAVESHOOT | Premium Reel Editing Studio</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,12 +44,6 @@
         .app-card .label { color: #9CA3AF; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
         .app-card .value { color: #FFFFFF; font-weight: 500; font-size: 13px; }
         .booking-confirm { background: linear-gradient(135deg, rgba(220,38,38,0.15), rgba(34,197,94,0.1)); border: 1px solid rgba(34,197,94,0.3); }
-        .story-card { background: rgba(15, 15, 15, 0.9); border: 1px solid rgba(220, 38, 38, 0.15); transition: all 0.3s ease; }
-        .story-card:hover { border-color: rgba(220, 38, 38, 0.5); transform: translateY(-5px); box-shadow: 0 10px 40px rgba(220, 38, 38, 0.1); }
-        .story-card .icon { color: #DC2626; }
-        .logo-caps { font-family: 'Space Grotesk', sans-serif; letter-spacing: 0.5px; }
-        .logo-caps .white { color: #FFFFFF; }
-        .logo-caps .red { color: #DC2626; }
     </style>
 </head>
 <body x-data="{ 
@@ -154,7 +148,7 @@
         }
     },
     searchApplication() {
-        let apps = JSON.parse(localStorage.getItem('capture_by_sai_sunkara_applications') || '[]');
+        let apps = JSON.parse(localStorage.getItem('weaveshoot_applications') || '[]');
         let found = apps.find(app => app.shootId === this.searchShootId || app.phone === this.searchPhone);
         if (found) {
             this.foundApplication = found;
@@ -174,7 +168,7 @@
     },
     generateShootId() {
         let chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
-        let id = 'CS-';
+        let id = 'WS-';
         for (let i = 0; i < 8; i++) { id += chars.charAt(Math.floor(Math.random() * chars.length)); }
         this.shootId = id;
         return id;
@@ -260,9 +254,9 @@
             status: 'Pending',
             submittedAt: new Date().toLocaleString()
         };
-        let apps = JSON.parse(localStorage.getItem('capture_by_sai_sunkara_applications') || '[]');
+        let apps = JSON.parse(localStorage.getItem('weaveshoot_applications') || '[]');
         apps.push(app);
-        localStorage.setItem('capture_by_sai_sunkara_applications', JSON.stringify(apps));
+        localStorage.setItem('weaveshoot_applications', JSON.stringify(apps));
         this.applications = apps;
         this.lastSubmittedApp = app;
         this.showBookingSuccess = true;
@@ -285,7 +279,7 @@
     loginAdmin() {
         if (this.adminPassword === '5201314') {
             this.adminLoggedIn = true;
-            this.applications = JSON.parse(localStorage.getItem('capture_by_sai_sunkara_applications') || '[]');
+            this.applications = JSON.parse(localStorage.getItem('weaveshoot_applications') || '[]');
             alert('✅ Admin login successful! Total: ' + this.applications.length + ' applications');
         } else {
             alert('❌ Invalid password. Use: 5201314');
@@ -295,7 +289,7 @@
     getTotalApplications() { return this.applications.length; },
     clearAllData() {
         if (confirm('⚠️ Delete all applications? This cannot be undone.')) {
-            localStorage.removeItem('capture_by_sai_sunkara_applications');
+            localStorage.removeItem('weaveshoot_applications');
             this.applications = [];
             this.showBookingSuccess = false;
             this.lastSubmittedApp = null;
@@ -303,17 +297,17 @@
         }
     },
     updateApplicationStatus(shootId, status) {
-        let apps = JSON.parse(localStorage.getItem('capture_by_sai_sunkara_applications') || '[]');
+        let apps = JSON.parse(localStorage.getItem('weaveshoot_applications') || '[]');
         let found = apps.find(app => app.shootId === shootId);
         if (found) {
             found.status = status;
-            localStorage.setItem('capture_by_sai_sunkara_applications', JSON.stringify(apps));
+            localStorage.setItem('weaveshoot_applications', JSON.stringify(apps));
             this.applications = apps;
             alert('✅ Status updated to: ' + status);
         }
     },
     loadApplications() {
-        this.applications = JSON.parse(localStorage.getItem('capture_by_sai_sunkara_applications') || '[]');
+        this.applications = JSON.parse(localStorage.getItem('weaveshoot_applications') || '[]');
         if (this.applications.length > 0) {
             let lastApp = this.applications[this.applications.length - 1];
             let now = new Date();
@@ -338,9 +332,7 @@
     <nav class="sticky top-0 z-40 bg-black/80 backdrop-blur-md border-b border-white/5 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-2 group">
-                <span class="text-xl font-bold tracking-tight logo-caps">
-                    <span class="white">CAPTURE_BY</span><span class="red">_SAI_SUNKARA</span>
-                </span>
+                <span class="text-2xl font-bold tracking-tighter text-white font-heading">WEAVE<span class="text-red-600 group-hover:text-red-500 transition-colors">SHOOT</span></span>
             </a>
             <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
                 <a href="#portfolio" class="hover:text-red-500 transition-colors">Portfolio</a>
@@ -348,7 +340,6 @@
                 <a href="#pipeline" class="hover:text-red-500 transition-colors">Pipeline</a>
                 <a href="#pricing" class="hover:text-red-500 transition-colors">Pricing</a>
                 <a href="#estimator" class="hover:text-red-500 transition-colors">Cost Estimator</a>
-                <a href="#story" class="hover:text-red-500 transition-colors">Our Story</a>
                 <a href="#faq" class="hover:text-red-500 transition-colors">FAQ</a>
             </div>
             <div class="hidden md:flex items-center gap-4">
@@ -369,7 +360,6 @@
             <a href="#pipeline" class="block text-gray-300 hover:text-red-500">Pipeline</a>
             <a href="#pricing" class="block text-gray-300 hover:text-red-500">Pricing</a>
             <a href="#estimator" class="block text-gray-300 hover:text-red-500">Cost Estimator</a>
-            <a href="#story" class="block text-gray-300 hover:text-red-500">Our Story</a>
             <button @click="toggleBookingApp()" class="w-full bg-red-600 py-3 rounded-xl font-medium">Book Now</button>
         </div>
     </nav>
@@ -380,17 +370,17 @@
         <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
             <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
                 <div class="inline-flex items-center gap-2 bg-red-950/40 border border-red-800/50 px-4 py-1.5 rounded-full text-xs text-red-400 font-medium tracking-wide">
-                    <span class="w-2 h-2 bg-red-500 rounded-full animate-ping"></span> Premium Photography & Post-Production Studio
+                    <span class="w-2 h-2 bg-red-500 rounded-full animate-ping"></span> Premium Post-Production Studio
                 </div>
                 <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold font-heading tracking-tight text-white leading-[1.1]">
-                    Capturing Moments That <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-300 text-glow-red">Tell Your Story</span>
+                    Professional Reel Editing That Makes Your Content <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-300 text-glow-red">Go Viral</span>
                 </h1>
                 <p class="text-gray-400 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light">
-                    Professional photography and editing services by <span class="text-red-400 font-bold">CAPTURE_BY_SAI_SUNKARA</span>. Book your slot for celebrity-style shoots, viral reels, and premium content creation.
+                    Book your high-end editing slot in minutes. Get flawless frame cuts, custom trending motion dynamics, and pristine sound architecture.
                 </p>
                 <div class="flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 text-xs text-gray-300 pt-2">
-                    <div><i class="fa-solid fa-circle-check text-red-500 mr-2"></i>Celebrity Photography</div>
-                    <div><i class="fa-solid fa-circle-check text-red-500 mr-2"></i>Viral Reel Editing</div>
+                    <div><i class="fa-solid fa-circle-check text-red-500 mr-2"></i>Professional Editing</div>
+                    <div><i class="fa-solid fa-circle-check text-red-500 mr-2"></i>24-48h Fast Delivery</div>
                     <div><i class="fa-solid fa-circle-check text-red-500 mr-2"></i>Unlimited Creativity</div>
                 </div>
                 <button @click="toggleBookingApp()" class="w-full sm:w-auto px-8 py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl font-medium tracking-wide shadow-lg glow-red transition-all transform hover:-translate-y-1">
@@ -410,13 +400,13 @@
                                 </div>
                                 <div class="text-center space-y-2">
                                     <div class="w-12 h-12 rounded-full border-2 border-red-500 flex items-center justify-center bg-black/60 mx-auto animate-pulse">
-                                        <i class="fa-solid fa-camera text-white text-sm"></i>
+                                        <i class="fa-solid fa-play text-white text-sm ml-0.5"></i>
                                     </div>
-                                    <span class="text-[10px] text-red-400 font-bold uppercase tracking-widest block">Tap to Preview</span>
+                                    <span class="text-[10px] text-red-400 font-bold uppercase tracking-widest block">Tap to Preview Reel</span>
                                 </div>
                                 <div class="text-xs text-white/90 space-y-1">
-                                    <p class="font-bold">@CAPTURE_BY_SAI_SUNKARA</p>
-                                    <p class="text-[11px] text-gray-300 line-clamp-2">How we captured viral moments for celebrities and brands ⚡</p>
+                                    <p class="font-bold">@weaveshoot_studio</p>
+                                    <p class="text-[11px] text-gray-300 line-clamp-2">How we generated over 50 Million views for creators this quarter alone ⚡</p>
                                 </div>
                             </div>
                         </div>
@@ -460,7 +450,7 @@
     <section class="border-y border-white/5 bg-neutral-950/60 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-6 gap-y-8 gap-x-4 text-center divide-x-0 md:divide-x divide-white/5">
-                <div class="px-2"><div class="text-3xl lg:text-4xl font-bold font-num text-white">5000+</div><div class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">Shots Captured</div></div>
+                <div class="px-2"><div class="text-3xl lg:text-4xl font-bold font-num text-white">5000+</div><div class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">Reels Edited</div></div>
                 <div class="px-2"><div class="text-3xl lg:text-4xl font-bold font-num text-red-500">800+</div><div class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">Happy Clients</div></div>
                 <div class="px-2"><div class="text-3xl lg:text-4xl font-bold font-num text-white">50M+</div><div class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">Views Generated</div></div>
                 <div class="px-2"><div class="text-3xl lg:text-4xl font-bold font-num text-red-500">4.9★</div><div class="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">Rating Score</div></div>
@@ -472,125 +462,11 @@
 
     <!-- TRUSTED BY -->
     <section class="py-10 bg-black overflow-hidden relative">
-        <div class="text-center text-xs font-semibold tracking-widest text-neutral-500 uppercase mb-6">Trusted by Top Creators, Celebrities & Global Brands</div>
+        <div class="text-center text-xs font-semibold tracking-widest text-neutral-500 uppercase mb-6">Trusted by Top Creators & Global Brands In Every Niche</div>
         <div class="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
             <div class="animate-infinite-scroll flex items-center gap-16 text-lg font-bold tracking-widest text-neutral-600 uppercase font-heading">
-                <span>Samantha</span><span>•</span><span>Sharwanand</span><span>•</span><span>Akhil Akkineni</span><span>•</span><span>Bhagyashri</span><span>•</span><span>Influencers</span><span>•</span><span>Corporate Brands</span><span>•</span><span>Podcasters</span>
-                <span>Samantha</span><span>•</span><span>Sharwanand</span><span>•</span><span>Akhil Akkineni</span><span>•</span><span>Bhagyashri</span><span>•</span><span>Influencers</span><span>•</span><span>Corporate Brands</span><span>•</span><span>Podcasters</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- OUR STORY SECTION -->
-    <section id="story" class="py-24 bg-black border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <h2 class="text-3xl md:text-5xl font-bold font-heading">Our <span class="text-red-500">Story</span></h2>
-                <p class="text-gray-400 text-sm md:text-base">Behind every great capture is a visionary storyteller who brings moments to life through the lens.</p>
-            </div>
-
-            <!-- Featured Photographer Card -->
-            <div class="glass-card p-8 rounded-2xl border border-red-500/20 mb-12">
-                <div class="flex flex-col md:flex-row items-center gap-8">
-                    <div class="w-32 h-32 rounded-full bg-gradient-to-br from-red-600 to-purple-600 flex items-center justify-center text-4xl font-bold text-white shrink-0">
-                        <i class="fa-solid fa-camera"></i>
-                    </div>
-                    <div class="text-center md:text-left">
-                        <h3 class="text-2xl font-bold font-heading text-white">CAPTURE_BY_SAI_SUNKARA</h3>
-                        <p class="text-red-400 text-sm mb-2">🎥 Visual Storyteller & Celebrity Photographer</p>
-                        <p class="text-gray-400 text-sm max-w-2xl">Sai Sunkara has famously captured high-profile Indian celebrities and events, bringing cinematic storytelling to life through his lens. His work spans across viral reels, promotional content, and iconic celebrity moments.</p>
-                        <a href="https://www.instagram.com/capture_by_sai_sunkara?igsh=MWtjbjR2ZG5iMXl2aw==" target="_blank" class="inline-flex items-center gap-2 mt-3 text-red-400 hover:text-red-300 transition-colors text-sm">
-                            <i class="fa-brands fa-instagram"></i> Follow on Instagram
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Celebrity Cards Grid - Left Image, Right Info -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Samantha Ruth Prabhu -->
-                <div class="story-card rounded-2xl overflow-hidden flex flex-col md:flex-row">
-                    <div class="w-full md:w-1/3 h-48 md:h-auto bg-gradient-to-br from-pink-500 to-red-500 flex items-center justify-center text-5xl font-bold text-white">
-                        SR
-                    </div>
-                    <div class="p-5 flex-1">
-                        <h4 class="text-lg font-bold text-white">Samantha Ruth Prabhu</h4>
-                        <p class="text-xs text-red-400 mt-1">🎬 Viral Reel Creator</p>
-                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Filmed multiple viral promotional reels for her during her recent <span class="text-red-400">"Ma Inti Bangaram"</span> promotional success events in Vizag.</p>
-                        <span class="text-[10px] bg-red-500/10 text-red-400 px-2 py-1 rounded-full inline-block mt-3">Instagram capture... +2</span>
-                    </div>
-                </div>
-
-                <!-- Sharwanand -->
-                <div class="story-card rounded-2xl overflow-hidden flex flex-col md:flex-row">
-                    <div class="w-full md:w-1/3 h-48 md:h-auto bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-5xl font-bold text-white">
-                        SH
-                    </div>
-                    <div class="p-5 flex-1">
-                        <h4 class="text-lg font-bold text-white">Sharwanand</h4>
-                        <p class="text-xs text-red-400 mt-1">⭐ Telugu Star</p>
-                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Captured popular <span class="text-red-400">"fan moment"</span> encounter reels featuring the charming Telugu star interacting with fans.</p>
-                        <span class="text-[10px] bg-red-500/10 text-red-400 px-2 py-1 rounded-full inline-block mt-3">Instagram Telugu Fil...</span>
-                    </div>
-                </div>
-
-                <!-- Akhil Akkineni & Bhagyashri -->
-                <div class="story-card rounded-2xl overflow-hidden flex flex-col md:flex-row">
-                    <div class="w-full md:w-1/3 h-48 md:h-auto bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center text-5xl font-bold text-white">
-                        AA
-                    </div>
-                    <div class="p-5 flex-1">
-                        <h4 class="text-lg font-bold text-white">Akhil & Bhagyashri</h4>
-                        <p class="text-xs text-red-400 mt-1">💑 Celebrity Duo</p>
-                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Recorded their graceful arrival and promotional cutout launch events at the <span class="text-red-400">Sangam Sarat Theatre</span> in Vizag.</p>
-                        <span class="text-[10px] bg-red-500/10 text-red-400 px-2 py-1 rounded-full inline-block mt-3">Instagram capture... +2</span>
-                    </div>
-                </div>
-
-                <!-- Local Brands -->
-                <div class="story-card rounded-2xl overflow-hidden flex flex-col md:flex-row">
-                    <div class="w-full md:w-1/3 h-48 md:h-auto bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center text-5xl font-bold text-white">
-                        LB
-                    </div>
-                    <div class="p-5 flex-1">
-                        <h4 class="text-lg font-bold text-white">Local Brands & Influencers</h4>
-                        <p class="text-xs text-red-400 mt-1">🏢 Brand Storyteller</p>
-                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">Shoots promotional event videos and aesthetic makeover reels for local businesses like <span class="text-red-400">Naturals Salon</span> in Gajuwaka.</p>
-                        <span class="text-[10px] bg-red-500/10 text-red-400 px-2 py-1 rounded-full inline-block mt-3">Instagram capture... +2</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Instagram Feed Preview -->
-            <div class="mt-12 glass-card p-6 rounded-2xl border border-white/5">
-                <div class="flex items-center justify-between mb-4">
-                    <h4 class="text-lg font-bold font-heading text-white">
-                        <i class="fa-brands fa-instagram text-red-400 mr-2"></i> Latest Captures
-                    </h4>
-                    <a href="https://www.instagram.com/capture_by_sai_sunkara?igsh=MWtjbjR2ZG5iMXl2aw==" target="_blank" class="text-xs text-red-400 hover:text-red-300 transition-colors">
-                        View All <i class="fa-solid fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-                <div class="grid grid-cols-3 gap-2">
-                    <div class="aspect-square bg-gradient-to-br from-red-500/20 to-purple-500/20 rounded-lg border border-white/5 flex items-center justify-center text-4xl text-red-400/50 hover:scale-105 transition-transform cursor-pointer">
-                        <i class="fa-brands fa-instagram"></i>
-                    </div>
-                    <div class="aspect-square bg-gradient-to-br from-blue-500/20 to-pink-500/20 rounded-lg border border-white/5 flex items-center justify-center text-4xl text-red-400/50 hover:scale-105 transition-transform cursor-pointer">
-                        <i class="fa-brands fa-instagram"></i>
-                    </div>
-                    <div class="aspect-square bg-gradient-to-br from-green-500/20 to-yellow-500/20 rounded-lg border border-white/5 flex items-center justify-center text-4xl text-red-400/50 hover:scale-105 transition-transform cursor-pointer">
-                        <i class="fa-brands fa-instagram"></i>
-                    </div>
-                    <div class="aspect-square bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-lg border border-white/5 flex items-center justify-center text-4xl text-red-400/50 hover:scale-105 transition-transform cursor-pointer">
-                        <i class="fa-brands fa-instagram"></i>
-                    </div>
-                    <div class="aspect-square bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg border border-white/5 flex items-center justify-center text-4xl text-red-400/50 hover:scale-105 transition-transform cursor-pointer">
-                        <i class="fa-brands fa-instagram"></i>
-                    </div>
-                    <div class="aspect-square bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-lg border border-white/5 flex items-center justify-center text-4xl text-red-400/50 hover:scale-105 transition-transform cursor-pointer">
-                        <i class="fa-brands fa-instagram"></i>
-                    </div>
-                </div>
+                <span>Influencers</span><span>•</span><span>Corporate Brands</span><span>•</span><span>Podcasters</span><span>•</span><span>Startups</span><span>•</span><span>Coaches</span><span>•</span><span>Real Estate Titans</span><span>•</span><span>Fitness Masters</span><span>•</span><span>Luxury Retail</span><span>•</span><span>Tech Reviewers</span>
+                <span>Influencers</span><span>•</span><span>Corporate Brands</span><span>•</span><span>Podcasters</span><span>•</span><span>Startups</span><span>•</span><span>Coaches</span><span>•</span><span>Real Estate Titans</span><span>•</span><span>Fitness Masters</span><span>•</span><span>Luxury Retail</span><span>•</span><span>Tech Reviewers</span>
             </div>
         </div>
     </section>
@@ -599,7 +475,7 @@
     <section id="portfolio" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <h2 class="text-3xl md:text-5xl font-bold font-heading">Our Recent <span class="text-red-500">Masterpieces</span></h2>
-            <p class="text-gray-400 text-sm md:text-base">Filter through our diverse portfolio of photography and editing work.</p>
+            <p class="text-gray-400 text-sm md:text-base">Filter through our diverse editing capability portfolio database.</p>
             <div class="flex flex-wrap justify-center gap-2 pt-4">
                 <template x-for="cat in ['all', 'viral', 'business', 'luxury', 'podcast', 'travel']">
                     <button @click="activeCategory = cat" :class="activeCategory === cat ? 'bg-red-600 text-white border-red-600' : 'bg-neutral-900 text-gray-400 border-white/5 hover:border-white/10'" class="px-4 py-1.5 rounded-full text-xs font-medium border capitalize transition-all duration-200" x-text="cat"></button>
@@ -610,34 +486,34 @@
             <div x-show="activeCategory === 'all' || activeCategory === 'viral'" class="glass-card rounded-2xl overflow-hidden group relative transition-all duration-300">
                 <div class="aspect-[9/16] bg-neutral-900 relative flex items-center justify-center overflow-hidden scanline">
                     <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-red-950/30 opacity-60 group-hover:scale-105 transition-transform duration-500"></div>
-                    <i class="fa-solid fa-camera text-3xl text-white/20 group-hover:text-red-600 group-hover:scale-110 transition-all duration-300 z-10"></i>
+                    <i class="fa-solid fa-play text-3xl text-white/20 group-hover:text-red-600 group-hover:scale-110 transition-all duration-300 z-10"></i>
                     <span class="absolute top-4 left-4 bg-red-600/90 text-white font-num font-bold px-2.5 py-1 rounded text-[10px] tracking-wider uppercase z-20">1.2M+ Views</span>
                 </div>
                 <div class="p-4 border-t border-white/5 bg-black/40">
-                    <h4 class="font-heading font-bold text-white text-base">Samantha Viral Reel Capture</h4>
+                    <h4 class="font-heading font-bold text-white text-base">Hormozi Style Talking Head Reel</h4>
                     <p class="text-xs text-gray-400 mt-1">High retention zoom cuts, pop-up text overlays, custom SFX architecture.</p>
                 </div>
             </div>
             <div x-show="activeCategory === 'all' || activeCategory === 'luxury'" class="glass-card rounded-2xl overflow-hidden group relative transition-all duration-300">
                 <div class="aspect-[9/16] bg-neutral-900 relative flex items-center justify-center overflow-hidden scanline">
                     <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-neutral-900 opacity-60 group-hover:scale-105 transition-transform duration-500"></div>
-                    <i class="fa-solid fa-camera text-3xl text-white/20 group-hover:text-red-600 group-hover:scale-110 transition-all duration-300 z-10"></i>
+                    <i class="fa-solid fa-play text-3xl text-white/20 group-hover:text-red-600 group-hover:scale-110 transition-all duration-300 z-10"></i>
                     <span class="absolute top-4 left-4 bg-black/80 text-white font-num font-bold px-2.5 py-1 rounded text-[10px] tracking-wider uppercase z-20">Premium Luxury</span>
                 </div>
                 <div class="p-4 border-t border-white/5 bg-black/40">
-                    <h4 class="font-heading font-bold text-white text-base">Akhil & Bhagyashri Event Coverage</h4>
+                    <h4 class="font-heading font-bold text-white text-base">Hyper-Automotive Cinematic Edit</h4>
                     <p class="text-xs text-gray-400 mt-1">Advanced speed ramping, heavy color grading nodes, seamless soundscape.</p>
                 </div>
             </div>
             <div x-show="activeCategory === 'all' || activeCategory === 'business' || activeCategory === 'podcast'" class="glass-card rounded-2xl overflow-hidden group relative transition-all duration-300">
                 <div class="aspect-[9/16] bg-neutral-900 relative flex items-center justify-center overflow-hidden scanline">
                     <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-red-950/20 opacity-60 group-hover:scale-105 transition-transform duration-500"></div>
-                    <i class="fa-solid fa-camera text-3xl text-white/20 group-hover:text-red-600 group-hover:scale-110 transition-all duration-300 z-10"></i>
+                    <i class="fa-solid fa-play text-3xl text-white/20 group-hover:text-red-600 group-hover:scale-110 transition-all duration-300 z-10"></i>
                     <span class="absolute top-4 left-4 bg-red-600/90 text-white font-num font-bold px-2.5 py-1 rounded text-[10px] tracking-wider uppercase z-20">Business Promo</span>
                 </div>
                 <div class="p-4 border-t border-white/5 bg-black/40">
-                    <h4 class="font-heading font-bold text-white text-base">Naturals Salon Brand Shoot</h4>
-                    <p class="text-xs text-gray-400 mt-1">Clean corporate lower thirds, multi-cam switches, background isolation.</p>
+                    <h4 class="font-heading font-bold text-white text-base">Corporate Thought-Leader Podcast Clip</h4>
+                    <p class="text-xs text-gray-400 mt-1">Clean corporate lower thirds, multi-cam switches, background isolation noise filter.</p>
                 </div>
             </div>
         </div>
@@ -646,24 +522,24 @@
     <!-- SERVICES -->
     <section id="services" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <h2 class="text-3xl md:text-5xl font-bold font-heading">Complete <span class="text-red-500">Photography & Editing</span> Suites</h2>
-            <p class="text-gray-400 text-sm md:text-base">We handle everything from celebrity shoots to advanced post-production pipelines.</p>
+            <h2 class="text-3xl md:text-5xl font-bold font-heading">Complete <span class="text-red-500">Video Engineering</span> Suites</h2>
+            <p class="text-gray-400 text-sm md:text-base">We handle everything from social shorts to advanced asset processing pipelines tailored around current multiplatform trends.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="glass-card p-6 rounded-2xl space-y-4 transition-all">
                 <div class="w-12 h-12 bg-red-600/10 rounded-xl flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-bolt"></i></div>
-                <h3 class="text-xl font-bold font-heading text-white">Viral Reel Production</h3>
-                <p class="text-sm text-gray-400">Optimized cuts for Instagram Reels, YouTube Shorts, and TikTok platform trends configured specifically to hook fast-scrolling viewer psychology.</p>
+                <h3 class="text-xl font-bold font-heading text-white">Social Engagement Shorts</h3>
+                <p class="text-sm text-gray-400">Optimized cuts for Instagram Reels, YouTube Shorts, and TikTok platform trends configured specifically to hook fast-scrolling viewer psychology profiles.</p>
             </div>
             <div class="glass-card p-6 rounded-2xl space-y-4 transition-all">
                 <div class="w-12 h-12 bg-red-600/10 rounded-xl flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-crown"></i></div>
-                <h3 class="text-xl font-bold font-heading text-white">Celebrity & Corporate Shoots</h3>
-                <p class="text-sm text-gray-400">High-end product launch videos, celebrity event coverage, and commercial brand announcements utilizing complex multi-node grade workflows.</p>
+                <h3 class="text-xl font-bold font-heading text-white">Luxury & Corporate Directives</h3>
+                <p class="text-sm text-gray-400">High-end product launch videos, real estate architectural reels, and commercial enterprise brand announcements utilizing complex multi-node grade workflows.</p>
             </div>
             <div class="glass-card p-6 rounded-2xl space-y-4 transition-all">
                 <div class="w-12 h-12 bg-red-600/10 rounded-xl flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                <h3 class="text-xl font-bold font-heading text-white">Advanced Post Production</h3>
-                <p class="text-sm text-gray-400">Dynamic kinetic motion graphic layouts, modern AI subtitle animations, pristine noise isolations, and smart object spatial tracking arrangements.</p>
+                <h3 class="text-xl font-bold font-heading text-white">Advanced FX Post Engineering</h3>
+                <p class="text-sm text-gray-400">Dynamic kinetic motion graphic layouts, modern AI subtitle animations, dialogue pristine noise isolations, and smart object spatial tracking arrangements.</p>
             </div>
         </div>
     </section>
@@ -679,19 +555,19 @@
                 <div class="lg:col-span-5 space-y-3">
                     <button @click="activePipelineStep = 1" :class="activePipelineStep === 1 ? 'border-red-500 bg-red-950/20 text-white' : 'border-white/5 bg-black/40 text-gray-400'" class="w-full text-left p-5 rounded-xl border flex gap-4 transition-all duration-200">
                         <div class="font-bold font-num text-sm text-red-500 bg-red-600/10 w-8 h-8 rounded flex items-center justify-center shrink-0">01</div>
-                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">Book Your Slot</h4><p class="text-[11px] text-gray-400 mt-0.5">Choose your service, select your preferred package, pick a convenient date and time, and confirm your booking.</p></div>
+                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">Book Your Slot</h4><p class="text-[11px] text-gray-400 mt-0.5">Choose your editing service, select your preferred package, pick a convenient date and time, and confirm your booking..</p></div>
                     </button>
                     <button @click="activePipelineStep = 2" :class="activePipelineStep === 2 ? 'border-red-500 bg-red-950/20 text-white' : 'border-white/5 bg-black/40 text-gray-400'" class="w-full text-left p-5 rounded-xl border flex gap-4 transition-all duration-200">
                         <div class="font-bold font-num text-sm text-red-500 bg-red-600/10 w-8 h-8 rounded flex items-center justify-center shrink-0">02</div>
-                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">Shoot Your Content</h4><p class="text-[11px] text-gray-400 mt-0.5">Record your video or capture photos using your phone or camera. Make sure the content is clear and captures everything you want us to work with.</p></div>
+                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">Shoot Your Video</h4><p class="text-[11px] text-gray-400 mt-0.5">Record your video using your phone or camera. Make sure the footage is clear and captures everything you want us to edit..</p></div>
                     </button>
                     <button @click="activePipelineStep = 3" :class="activePipelineStep === 3 ? 'border-red-500 bg-red-950/20 text-white' : 'border-white/5 bg-black/40 text-gray-400'" class="w-full text-left p-5 rounded-xl border flex gap-4 transition-all duration-200">
                         <div class="font-bold font-num text-sm text-red-500 bg-red-600/10 w-8 h-8 rounded flex items-center justify-center shrink-0">03</div>
-                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">We Edit Your Content</h4><p class="text-[11px] text-gray-400 mt-0.5">Our professional editors enhance your footage with cinematic cuts, smooth transitions, color grading, motion graphics, sound design, subtitles, and trending effects.</p></div>
+                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">We Edit Your Video</h4><p class="text-[11px] text-gray-400 mt-0.5">Our professional editors enhance your footage with cinematic cuts, smooth transitions, color grading, motion graphics, sound design, subtitles, and trending effects to create a high-quality final edit.</p></div>
                     </button>
                     <button @click="activePipelineStep = 4" :class="activePipelineStep === 4 ? 'border-red-500 bg-red-950/20 text-white' : 'border-white/5 bg-black/40 text-gray-400'" class="w-full text-left p-5 rounded-xl border flex gap-4 transition-all duration-200">
                         <div class="font-bold font-num text-sm text-red-500 bg-red-600/10 w-8 h-8 rounded flex items-center justify-center shrink-0">04</div>
-                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">Review & Revisions</h4><p class="text-[11px] text-gray-400 mt-0.5">Watch the first edited version, share your feedback, and request revisions. We'll make the necessary changes until you're happy with the result.</p></div>
+                        <div><h4 class="font-heading font-bold text-sm sm:text-base text-white">Review & Revisions</h4><p class="text-[11px] text-gray-400 mt-0.5">Watch the first edited version, share your feedback, and request revisions (according to your selected plan). We'll make the necessary changes until you're happy with the result..</p></div>
                     </button>
                     <button @click="activePipelineStep = 5" :class="activePipelineStep === 5 ? 'border-red-500 bg-red-950/20 text-white' : 'border-white/5 bg-black/40 text-gray-400'" class="w-full text-left p-5 rounded-xl border flex gap-4 transition-all duration-200">
                         <div class="font-bold font-num text-sm text-red-500 bg-red-600/10 w-8 h-8 rounded flex items-center justify-center shrink-0">05</div>
@@ -706,27 +582,27 @@
                         </div>
                         <div x-show="activePipelineStep === 1" x-transition class="space-y-3">
                             <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">01 / Secure Intake Locker Portal</h3>
-                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Choose your service, select your preferred package, pick a convenient date and time, and confirm your booking.</p>
+                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Choose your editing service, select your preferred package, pick a convenient date and time, and confirm your booking.</p>
                         </div>
                         <div x-show="activePipelineStep === 2" x-transition class="space-y-3">
-                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">02 / Content Capture & Assembly</h3>
-                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Record your video or capture photos using your phone or camera. Make sure the content is clear and captures everything you want us to work with.</p>
+                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">02 / Narrative Trimming & Assembly Flow</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Record your video using your phone or camera. Make sure the footage is clear and captures everything you want us to edit.</p>
                         </div>
                         <div x-show="activePipelineStep === 3" x-transition class="space-y-3">
-                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">03 / Visual Enhancement & Effects</h3>
-                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Our professional editors enhance your content with cinematic cuts, smooth transitions, color grading, motion graphics, sound design, subtitles, and trending effects.</p>
+                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">03 / Kinetic Visual Component Layering</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Our professional editors enhance your footage with cinematic cuts, smooth transitions, color grading, motion graphics, sound design, subtitles, and trending effects to create a high-quality final edit.</p>
                         </div>
                         <div x-show="activePipelineStep === 4" x-transition class="space-y-3">
-                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">04 / Multiplatform Compliance Review</h3>
-                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Watch the first edited version, share your feedback, and request revisions. We'll make the necessary changes until you're happy with the result.</p>
+                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">04 / Multiplatform Compliance Inspections</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Watch the first edited version, share your feedback, and request revisions (according to your selected plan). We'll make the necessary changes until you're happy with the result.</p>
                         </div>
                         <div x-show="activePipelineStep === 5" x-transition class="space-y-3">
-                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">05 / High Bit-Rate Master Delivery</h3>
-                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">After your approval, we'll deliver the final high-quality content, optimized and ready to post on Instagram Reels, YouTube Shorts, Facebook, TikTok, or any platform you choose.</p>
+                            <h3 class="text-xl sm:text-2xl font-bold font-heading text-white">05 / High Bit-Rate Master Dispatch</h3>
+                            <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">After your approval, we'll deliver the final high-quality video, optimized and ready to post on Instagram Reels, YouTube Shorts, Facebook Reels, TikTok, or any platform you choose..</p>
                         </div>
                     </div>
                     <div class="pt-6 border-t border-white/5 flex flex-wrap justify-between items-center gap-4 text-xs text-neutral-500">
-                        <div>Software Active: <span class="text-gray-300 font-medium">Premiere Pro / After Effects / Lightroom CC</span></div>
+                        <div>Software Active: <span class="text-gray-300 font-medium">Premiere Pro / After Effects CC Studio</span></div>
                         <button @click="toggleBookingApp()" class="text-red-500 font-bold uppercase tracking-wider hover:underline">Initiate This Workflow <i class="fa-solid fa-arrow-right ml-1"></i></button>
                     </div>
                 </div>
@@ -734,19 +610,20 @@
         </div>
     </section>
 
-    <!-- PRICING -->
+    <!-- PRICING - DEFAULT STARTER SELECTED -->
     <section id="pricing" class="py-24 bg-black relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
-                <h2 class="text-3xl md:text-5xl font-bold font-heading">Choose Your <span class="text-red-500">Package</span></h2>
-                <p class="text-gray-400 text-sm">Select a tier aligned to your content creation requirements.</p>
+                <h2 class="text-3xl md:text-5xl font-bold font-heading">Choose Your <span class="text-red-500">Booking Plan</span></h2>
+                <p class="text-gray-400 text-sm">Select a tier aligned to your monthly publication volume requirements.</p>
                 <div class="text-xs text-green-400 bg-green-950/20 px-4 py-2 rounded-full inline-block border border-green-500/30">⭐ Starter selected by default - 1 Day • Normal Video Only</div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-stretch">
+                <!-- Starter - DEFAULT SELECTED -->
                 <div @click="selectedPack = 'starter'" :class="selectedPack === 'starter' ? 'pack-selected border-red-500 bg-red-950/20' : 'glass-card'" class="rounded-2xl p-6 flex flex-col justify-between transition-all relative cursor-pointer border-2">
                     <div class="pack-badge absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white font-bold text-[9px] uppercase px-3 py-1 rounded-full tracking-widest shadow">Default</div>
                     <div class="space-y-4">
-                        <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Starter</div>
+                        <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Starter Niche</div>
                         <div class="flex items-baseline gap-1"><span class="text-3xl font-bold font-num text-white">₹499</span><span class="text-xs text-gray-400">/ 1 reel</span></div>
                         <p class="text-xs text-gray-400 border-b border-white/5 pb-4">1 Day • Normal Video Only</p>
                         <ul class="space-y-2.5 text-xs text-gray-300">
@@ -761,7 +638,7 @@
                 <div @click="selectedPack = 'creator'" :class="selectedPack === 'creator' ? 'pack-selected border-red-500 bg-red-950/20' : 'glass-card'" class="rounded-2xl p-6 flex flex-col justify-between transition-all relative cursor-pointer border-2 border-red-500/30 bg-neutral-950/80">
                     <div class="pack-badge absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white font-bold text-[9px] uppercase px-3 py-1 rounded-full tracking-widest shadow">Selected</div>
                     <div class="space-y-4">
-                        <div class="text-xs font-bold uppercase tracking-widest text-red-400">Creator</div>
+                        <div class="text-xs font-bold uppercase tracking-widest text-red-400">Creator Volume</div>
                         <div class="flex items-baseline gap-1"><span class="text-3xl font-bold font-num text-white">₹1,999</span><span class="text-xs text-gray-400">/ 5 reels</span></div>
                         <p class="text-xs text-gray-400 border-b border-white/5 pb-4">2 Days • High/Minimal Core</p>
                         <ul class="space-y-2.5 text-xs text-gray-300">
@@ -778,7 +655,7 @@
                     <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white font-bold text-[9px] uppercase px-3 py-1 rounded-full tracking-widest shadow">Most Requested</span>
                     <div class="pack-badge absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white font-bold text-[9px] uppercase px-3 py-1 rounded-full tracking-widest shadow" style="margin-top: 20px;">Selected</div>
                     <div class="space-y-4">
-                        <div class="text-xs font-bold uppercase tracking-widest text-red-400">Professional</div>
+                        <div class="text-xs font-bold uppercase tracking-widest text-red-400">Professional Scale</div>
                         <div class="flex items-baseline gap-1"><span class="text-3xl font-bold font-num text-white">₹4,999</span><span class="text-xs text-gray-400">/ 15 reels</span></div>
                         <p class="text-xs text-gray-400 border-b border-white/5 pb-4">3 Days • High/Minimal Core</p>
                         <ul class="space-y-2.5 text-xs text-gray-300">
@@ -794,7 +671,7 @@
                 <div @click="selectedPack = 'enterprise'" :class="selectedPack === 'enterprise' ? 'pack-selected border-red-500 bg-red-950/20' : 'glass-card'" class="rounded-2xl p-6 flex flex-col justify-between transition-all relative cursor-pointer border-2">
                     <div class="pack-badge absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white font-bold text-[9px] uppercase px-3 py-1 rounded-full tracking-widest shadow">Selected</div>
                     <div class="space-y-4">
-                        <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Enterprise</div>
+                        <div class="text-xs font-bold uppercase tracking-widest text-gray-400">Enterprise Core</div>
                         <div class="flex items-baseline gap-1"><span class="text-2xl font-bold font-heading text-white">Custom</span></div>
                         <p class="text-xs text-gray-400 border-b border-white/5 pb-4">5 Days • High/Minimal Core</p>
                         <ul class="space-y-2.5 text-xs text-gray-300">
@@ -822,7 +699,7 @@
     <section id="estimator" class="py-24 bg-neutral-950/30 border-t border-white/5">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <h2 class="text-3xl font-bold font-heading">Choose Your <span class="text-red-500">Package & Estimate Cost</span></h2>
+                <h2 class="text-3xl font-bold font-heading">Choose Your <span class="text-red-500">Booking Plan & Estimate Cost</span></h2>
                 <p class="text-gray-400 text-sm">Default: Starter Plan • 1 Day • Normal Video • Trainee Editor • No Add-ons</p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
@@ -905,17 +782,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
                 <h2 class="text-3xl md:text-4xl font-bold font-heading">Endorsed By <span class="text-red-500">High-Performance Creators</span></h2>
-                <p class="text-gray-400 text-sm">See real feedback from clients maintaining aggressive content schedules worldwide.</p>
+                <p class="text-gray-400 text-sm">See real feedback from channels maintaining aggressive publication schedules worldwide.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div class="glass-card p-5 rounded-xl space-y-3">
                     <div class="text-xs text-red-500"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    <p class="text-xs text-gray-300 italic">"The turnaround structural pacing is unmatched. They perfectly captured the visual layout dynamic on the first attempt without extensive correction notes required."</p>
+                    <p class="text-xs text-gray-300 italic">"The turnaround structural pacing is unmatched. They perfectly captured the Hormozi visual layout dynamic on the first attempt without extensive correction notes required."</p>
                     <div class="text-xs font-bold text-white font-heading mt-2">— Tech Startup Founder</div>
                 </div>
                 <div class="glass-card p-5 rounded-xl space-y-3">
                     <div class="text-xs text-red-500"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    <p class="text-xs text-gray-300 italic">"Our channel retention metric jumped straight up by 34% inside two weeks of transitioning post work entirely onto their pipeline. Highly reliable system."</p>
+                    <p class="text-xs text-gray-300 italic">"Our channel retention metric jumped straight up by 34% inside two weeks of transitioning post work entirely onto WeaveShoot pipelines. Highly reliable system."</p>
                     <div class="text-xs font-bold text-white font-heading mt-2">— Finance Content Creator</div>
                 </div>
                 <div class="glass-card p-5 rounded-xl space-y-3">
@@ -941,7 +818,7 @@
         <div class="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
             <div class="p-4 bg-neutral-950 rounded-xl border border-white/5 space-y-2">
                 <div class="w-16 h-16 bg-neutral-900 rounded-full mx-auto flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-user-tie"></i></div>
-                <div class="text-sm font-bold font-heading text-white">Sai Sunkara</div><div class="text-[11px] text-gray-500">Founder & Creative Director</div>
+                <div class="text-sm font-bold font-heading text-white">Founder & CD</div><div class="text-[11px] text-gray-500">Creative Direction</div>
             </div>
             <div class="p-4 bg-neutral-950 rounded-xl border border-white/5 space-y-2">
                 <div class="w-16 h-16 bg-neutral-900 rounded-full mx-auto flex items-center justify-center text-red-500 text-xl"><i class="fa-solid fa-photo-film"></i></div>
@@ -1004,7 +881,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-12">
             <!-- Video Editor Highlights -->
             <div class="space-y-4">
-                <h4 class="text-lg font-bold font-heading text-white">Editor Highlights</h4>
+                <h4 class="text-lg font-bold font-heading text-white">Video Editor Highlights</h4>
                 <div class="space-y-3">
                     <div class="bg-black/40 p-4 rounded-xl border border-white/5 hover:border-red-500/30 transition-all">
                         <div class="text-[10px] text-red-500 uppercase font-bold tracking-wider mb-1">🎬 Trainee</div>
@@ -1029,44 +906,44 @@
                 </div>
             </div>
 
-            <!-- Live @capture_by_sai_sunkara Feed -->
+            <!-- Live @WeaveShoot Feed -->
             <div class="space-y-4">
                 <div class="flex items-center justify-between">
-                    <h4 class="text-lg font-bold font-heading text-white">Live @CAPTURE_BY_SAI_SUNKARA</h4>
-                    <a href="https://www.instagram.com/capture_by_sai_sunkara?igsh=MWtjbjR2ZG5iMXl2aw==" target="_blank" class="text-[10px] text-red-400 hover:text-red-300 transition-colors flex items-center gap-1">
-                        <i class="fa-brands fa-instagram"></i> View All
+                    <h4 class="text-lg font-bold font-heading text-white">Live @WeaveShoot Feed</h4>
+                    <a href="#" class="text-[10px] text-red-400 hover:text-red-300 transition-colors flex items-center gap-1">
+                        <i class="fa-brands fa-instagram"></i> View Visitors
                     </a>
                 </div>
                 <div class="bg-black/40 p-4 rounded-xl border border-white/5">
                     <div class="flex items-center gap-3 mb-3">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-red-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">CS</div>
-                        <div><div class="text-sm font-bold text-white">@CAPTURE_BY_SAI_SUNKARA</div><div class="text-[10px] text-gray-400">2.4M Followers • 1,284 Posts</div></div>
-                        <a href="https://www.instagram.com/capture_by_sai_sunkara?igsh=MWtjbjR2ZG5iMXl2aw==" target="_blank" class="ml-auto bg-red-600 text-white text-[10px] px-3 py-1 rounded-full font-bold">Follow</a>
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-red-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm">WS</div>
+                        <div><div class="text-sm font-bold text-white">@weaveshoot_studio</div><div class="text-[10px] text-gray-400">2.4M Followers • 1,284 Posts</div></div>
+                        <a href="#" class="ml-auto bg-red-600 text-white text-[10px] px-3 py-1 rounded-full font-bold">Follow</a>
                     </div>
                     <div class="grid grid-cols-3 gap-1">
                         <div class="aspect-square bg-neutral-900 rounded-lg border border-white/5 flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer relative group">
                             <i class="fa-brands fa-instagram text-lg"></i>
-                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">Samantha</span>
+                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">12.3k likes</span>
                         </div>
                         <div class="aspect-square bg-neutral-900 rounded-lg border border-white/5 flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer relative group">
                             <i class="fa-brands fa-instagram text-lg"></i>
-                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">Sharwanand</span>
+                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">8.7k likes</span>
                         </div>
                         <div class="aspect-square bg-neutral-900 rounded-lg border border-white/5 flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer relative group">
                             <i class="fa-brands fa-instagram text-lg"></i>
-                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">Akhil</span>
+                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">24.1k likes</span>
                         </div>
                         <div class="aspect-square bg-neutral-900 rounded-lg border border-white/5 flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer relative group">
                             <i class="fa-brands fa-instagram text-lg"></i>
-                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">Bhagyashri</span>
+                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">5.6k likes</span>
                         </div>
                         <div class="aspect-square bg-neutral-900 rounded-lg border border-white/5 flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer relative group">
                             <i class="fa-brands fa-instagram text-lg"></i>
-                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">Events</span>
+                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">18.9k likes</span>
                         </div>
                         <div class="aspect-square bg-neutral-900 rounded-lg border border-white/5 flex items-center justify-center text-neutral-700 hover:text-red-500 transition-colors cursor-pointer relative group">
                             <i class="fa-brands fa-instagram text-lg"></i>
-                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">Brands</span>
+                            <span class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[8px] text-white">31.2k likes</span>
                         </div>
                     </div>
                     <div class="flex justify-between text-[9px] text-gray-500 mt-3">
@@ -1079,7 +956,7 @@
             <!-- Weave Shoot Show -->
             <div class="space-y-4">
                 <h4 class="text-lg font-bold font-heading text-white flex items-center gap-2">
-                    <i class="fa-solid fa-wand-magic-sparkles text-red-500"></i> View Your Application
+                    <i class="fa-solid fa-wand-magic-sparkles text-red-500"></i> Weave Shoot Show
                 </h4>
                 <p class="text-xs text-gray-400">Enter your <span class="text-red-400">Shoot ID</span> or <span class="text-red-400">Phone Number</span> to view your application.</p>
                 <form class="space-y-3" @submit.prevent="validateCaptcha()">
@@ -1134,10 +1011,10 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 bg-neutral-950 p-8 sm:p-12 rounded-3xl border border-white/10 relative overflow-hidden">
             <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-red-600/5 rounded-full blur-[100px] pointer-events-none"></div>
             <div class="lg:col-span-5 space-y-6">
-                <div class="space-y-3"><h2 class="text-3xl font-bold font-heading text-white">Request a <span class="text-red-500">Call Back for Booking</span></h2><p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Need help choosing the right plan? Fill in your details and our team will call you back within 60 minutes.</p></div>
+                <div class="space-y-3"><h2 class="text-3xl font-bold font-heading text-white">Request a <span class="text-red-500">Call Back for Booking Slot</span></h2><p class="text-xs sm:text-sm text-gray-400 leading-relaxed">Need help choosing the right plan? Fill in your details and our team will call you back within 60 minutes.</p></div>
                 <div class="space-y-3 text-xs sm:text-sm text-gray-300 pt-4">
                     <div class="flex items-center gap-3"><i class="fa-brands fa-whatsapp text-green-500 text-base"></i><span>+91 98765 43210 (Secure Chat Support)</span></div>
-                    <div class="flex items-center gap-3"><i class="fa-solid fa-envelope text-red-500"></i><span>capture@weaveshoot.com</span></div>
+                    <div class="flex items-center gap-3"><i class="fa-solid fa-envelope text-red-500"></i><span>production@weaveshoot.com</span></div>
                     <div class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-neutral-500"></i><span>Premium Studio Hub, Phase II, New Delhi</span></div>
                 </div>
                 <div class="pt-6 border-t border-white/5 space-y-2">
@@ -1184,7 +1061,7 @@
         <div class="bg-neutral-950 rounded-3xl border border-white/10 max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 relative glass-card">
             <button @click="showBookingApp = false" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
             <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold font-heading text-white">Book Your <span class="text-red-500">Slot</span></h2>
+                <h2 class="text-2xl font-bold font-heading text-white">Book Studio <span class="text-red-500">Slot</span></h2>
                 <p class="text-xs text-gray-400">Complete all steps to book your shoot</p>
                 <div class="flex justify-center gap-2 mt-3">
                     <template x-for="i in totalSteps" :key="i">
@@ -1212,7 +1089,7 @@
                 <div class="flex justify-end"><button @click="nextStep()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-all">Next <i class="fa-solid fa-arrow-right ml-1"></i></button></div>
             </div>
 
-            <!-- STEP 2 -->
+            <!-- STEP 2 - Date picker with min date -->
             <div x-show="step === 2" x-transition class="space-y-4">
                 <h3 class="text-lg font-bold font-heading text-white"><i class="fa-solid fa-calendar text-red-500 mr-2"></i>Booking Date & Time</h3>
                 <div>
@@ -1266,7 +1143,7 @@
                     <div class="bg-black/40 p-4 rounded-xl border border-blue-500/20 text-center">
                         <div class="text-xs text-gray-400">Scan to Pay</div>
                         <div class="bg-white p-4 rounded-xl inline-block mx-auto my-2"><div class="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center"><i class="fa-solid fa-qrcode text-6xl text-white/80"></i></div></div>
-                        <div class="text-xs text-green-400">UPI: capture@pay</div>
+                        <div class="text-xs text-green-400">UPI: weaveshoot@pay</div>
                     </div>
                     <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">UPI ID</label><input type="text" x-model="upiId" placeholder="your@upi" class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
                     <div><label class="text-[10px] uppercase font-bold tracking-wider text-gray-400">Screenshot</label><input type="file" @change="screenshotFile = $event.target.files[0]" accept="image/*" class="w-full bg-black border border-white/10 px-4 py-3 rounded-xl text-xs text-white focus:outline-none focus:border-red-600"></div>
@@ -1363,20 +1240,15 @@
     <!-- FOOTER -->
     <footer class="border-t border-white/5 bg-black py-12 text-xs text-gray-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-            <div class="space-y-3">
-                <span class="text-base font-bold tracking-tight logo-caps">
-                    <span class="white">CAPTURE_BY</span><span class="red">_SAI_SUNKARA</span>
-                </span>
-                <p class="text-gray-400 leading-relaxed max-w-xs">Premium photography and post-production media engineering systems.</p>
-            </div>
-            <div class="space-y-2"><div class="text-white font-heading font-bold uppercase tracking-wider text-[10px]">Studio</div><a href="#services" class="block hover:text-white">Photography</a><a href="#services" class="block hover:text-white">Reel Editing</a><a href="#services" class="block hover:text-white">Sound Design</a></div>
+            <div class="space-y-3"><span class="text-base font-bold font-heading text-white tracking-tighter">WEAVE<span class="text-red-500">SHOOT</span></span><p class="text-gray-400 leading-relaxed max-w-xs">Premium media engineering systems.</p></div>
+            <div class="space-y-2"><div class="text-white font-heading font-bold uppercase tracking-wider text-[10px]">Studio</div><a href="#services" class="block hover:text-white">Social Reels</a><a href="#services" class="block hover:text-white">Cinematic Grade</a><a href="#services" class="block hover:text-white">Sound Design</a></div>
             <div class="space-y-2"><div class="text-white font-heading font-bold uppercase tracking-wider text-[10px]">Resources</div><a href="#faq" class="block hover:text-white">FAQ</a><a href="#portfolio" class="block hover:text-white">Portfolio</a><a href="#estimator" class="block hover:text-white">Calculator</a></div>
             <div class="space-y-2"><div class="text-white font-heading font-bold uppercase tracking-wider text-[10px]">Legal</div><a href="#" class="block hover:text-white">Privacy</a><a href="#" class="block hover:text-white">Terms</a><a href="#" class="block hover:text-white">Refund</a></div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
-            <div>&copy; 2026 CAPTURE_BY_SAI_SUNKARA — Powered by SPACE FRAME MEDIA HUB</div>
+            <div>&copy; 2026 WEAVESHOOT powered by SPACE FRAME MEDIA HUB by workspace hub</div>
             <div class="flex gap-4 text-sm text-neutral-400">
-                <a href="https://www.instagram.com/capture_by_sai_sunkara?igsh=MWtjbjR2ZG5iMXl2aw==" target="_blank" class="hover:text-red-500"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-red-500"><i class="fa-brands fa-instagram"></i></a>
                 <a href="#" class="hover:text-red-500"><i class="fa-brands fa-youtube"></i></a>
                 <a href="#" class="hover:text-red-500"><i class="fa-brands fa-tiktok"></i></a>
                 <a href="#" class="hover:text-red-500"><i class="fa-brands fa-whatsapp"></i></a>
@@ -1386,7 +1258,7 @@
 
     <!-- MOBILE STICKY -->
     <div class="md:hidden fixed bottom-4 left-4 right-4 z-40 flex gap-2">
-        <button @click="toggleBookingApp()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase py-3.5 rounded-xl tracking-wider text-center shadow-2xl block glow-red">Book Now</button>
+        <button @click="toggleBookingApp()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase py-3.5 rounded-xl tracking-wider text-center shadow-2xl block glow-red">Book Studio Slot</button>
         <a href="https://wa.me/919876543210" target="_blank" class="w-12 bg-neutral-900 border border-white/10 rounded-xl flex items-center justify-center text-green-400 shadow-2xl"><i class="fa-brands fa-whatsapp text-lg"></i></a>
     </div>
 
